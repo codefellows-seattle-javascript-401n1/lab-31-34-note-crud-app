@@ -22,7 +22,8 @@ if (production) {
       compress: {
         warnings: false
       }
-    })
+    }),
+    new CleanPlugin()
   ]);
 }
 
