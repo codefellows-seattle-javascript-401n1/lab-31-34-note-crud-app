@@ -10,6 +10,7 @@ angular.module('demoApp', []);
 require('./service/list-service');
 require('./service/note-service');
 
-
+require('./component/main');
+require('./component/list');
 require('./component/create-list-form');
 require('./component/create-note-form');
