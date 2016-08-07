@@ -7,7 +7,7 @@ angular.module('noteList').directive('appMain', function(){
   return {
     restrict: 'E',
     replace: true,
-    controller: AppMainController,
+    controller: ['listService', AppMainController],
     controllerAs: 'appMainCtrl',
     bindToController: true,
     template: require('./app-main.html'),
@@ -15,6 +15,12 @@ angular.module('noteList').directive('appMain', function(){
   };
 });
 
-function AppMainController(){
-
+function AppMainController(listService){
+  listService.fetchLists()
+  .then((lists) => {
+    this.lists = lists;
+  })
+  .catch((err) => {
+    alert(err.status);
+  });
 }

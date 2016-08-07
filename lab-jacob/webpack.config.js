@@ -1,7 +1,18 @@
 'use strict';
 
+const webpack = require('webpack');
+
 const extractText = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+
+const apiUrl = process.env.__API_URL__ || 'http://localhost:3000';
+
+var plugins = [
+  new extractText('bundle.css'),
+  new webpack.DefinePlugin({
+    __API_URL__: JSON.stringify(apiUrl)
+  })
+];
 
 module.exports = {
   entry: `${__dirname}/app/entry.js`,
@@ -9,9 +20,7 @@ module.exports = {
     path: 'build',
     filename: 'bundle.js'
   },
-  plugins: [
-    new extractText('bundle.css')
-  ],
+  plugins: plugins,
   sassLoader: {
     includePaths: [`${__dirname}/app/scss/lib`]
   },

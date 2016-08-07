@@ -54,9 +54,12 @@
 	angular.module('noteList', []);
 
 	//services
+	__webpack_require__(8);
 
 	//components
-	__webpack_require__(8);
+	__webpack_require__(9);
+	__webpack_require__(13);
+	__webpack_require__(17);
 
 /***/ },
 /* 1 */
@@ -31860,7 +31863,102 @@
 
 	'use strict';
 
-	__webpack_require__(9);
+	var angular = __webpack_require__(6);
+
+	angular.module('noteList').factory('listService', ['$log', '$q', '$http', listService]);
+
+	function listService($log, $q, $http) {
+	  var service = {};
+	  var url = ("http://localhost:3000") + '/api/list';
+	  var config = {
+	    header: {
+	      'Content-Type': 'application/json',
+	      'Accept': 'application/json'
+	    }
+	  };
+
+	  service.lists = [];
+
+	  service.createList = function (data) {
+	    var _this = this;
+
+	    $log.debug('createList in listService');
+	    return $q(function (resolve, reject) {
+	      $http.post(url, data, config).then(function (res) {
+	        _this.lists.push(res.data);
+	        resolve(res.data);
+	      }).catch(function (err) {
+	        reject(err);
+	      });
+	    });
+	  };
+
+	  service.fetchLists = function () {
+	    var _this2 = this;
+
+	    $log.debug('fetchList in listService');
+	    return $q(function (resolve, reject) {
+	      $http.get(url, config).then(function (res) {
+	        $log.log('GET ' + url + ':' + status + ' success!!');
+	        _this2.lists = res.data;
+	        resolve(res.data);
+	      }).catch(function (err) {
+	        $log.error('GET ' + url + ':' + err.status + ' failure!');
+	        reject(err);
+	      });
+	    });
+	  };
+
+	  service.updateList = function (data) {
+	    var _this3 = this;
+
+	    $log.debug('updateList in listService');
+	    return $q(function (resolve, reject) {
+	      $http.put(url + '/' + data._id, data, config).then(function (res) {
+	        $log.log('GET ' + url + ':' + res.status + ' success!!');
+	        _this3.lists.forEach(function (list, index) {
+	          if (list._id === res.data._id) {
+	            _this3.lists[index] = res.data;
+	          }
+	        });
+	        resolve(res.data);
+	      }).catch(function (err) {
+	        $log.error('GET ' + url + ':' + err.status + ' failure!!');
+	        reject(err);
+	      });
+	    });
+	  };
+
+	  service.deleteList = function (listId) {
+	    var _this4 = this;
+
+	    $log.debug('deleteList in listService');
+	    return $q(function (resolve, reject) {
+	      $http.delete(url + '/' + listId + ', config').then(function (res) {
+	        $log.log('DELETE ' + url + ':' + res.status + ' success!!');
+	        _this4.lists.forEach(function (list, index) {
+	          if (list._id === listId) {
+	            _this4.lists.splice(index, 1);
+	          }
+	        });
+	        resolve(res.data);
+	      }).catch(function (err) {
+	        $log.log('DELETE ' + url + ':' + err.status + ' failure!!');
+	        reject(err);
+	      });
+	    });
+	  };
+
+	  return service;
+	}
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(10);
 
 	var angular = __webpack_require__(6);
 
@@ -31868,28 +31966,140 @@
 	  return {
 	    restrict: 'E',
 	    replace: true,
-	    controller: AppMainController,
+	    controller: ['listService', AppMainController],
 	    controllerAs: 'appMainCtrl',
 	    bindToController: true,
-	    template: __webpack_require__(11),
+	    template: __webpack_require__(12),
 	    scope: {}
 	  };
 	});
 
-	function AppMainController() {}
+	function AppMainController(listService) {
+	  var _this = this;
+
+	  listService.fetchLists().then(function (lists) {
+	    _this.lists = lists;
+	  }).catch(function (err) {
+	    alert(err.status);
+	  });
+	}
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 10 */,
-/* 11 */
+/* 11 */,
+/* 12 */
 /***/ function(module, exports) {
 
-	module.exports = "<main class=\"app-main\">\n  <h1>hello browsers</h1>\n</main>\n";
+	module.exports = "<main class=\"app-main\">\n  <header>\n    <h1>Note Cloud</h1>\n  </header>\n\n  <app-create-list-form></app-create-list-form>\n  <app-display-list ng-repeat=\"item in mainCtrl.lists\" list=\"item\"></app-display-list>\n</main>\n";
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(14);
+
+	var angular = __webpack_require__(6);
+
+	angular.module('noteList').directive('appCreateListForm', function () {
+	  return {
+	    restrict: 'E',
+	    replace: true,
+	    constroller: ['$log', 'listService', CreateListFormController],
+	    controllerAs: 'createListFormCtrl',
+	    bindToController: true,
+	    template: __webpack_require__(16),
+	    scope: {}
+	  };
+	});
+
+	function CreateListFormController($log, listService) {
+	  this.list = [];
+
+	  this.createList = function () {
+	    var _this = this;
+
+	    $log.debug('createList function in createList controller');
+	    listService.createList(this.list).then(function () {
+	      _this.list = {};
+	    }).catch(function () {
+	      _this.list = {};
+	      alert('failure in createListController');
+	    });
+	  };
+	}
+
+/***/ },
+/* 14 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 15 */,
+/* 16 */
+/***/ function(module, exports) {
+
+	module.exports = "<form novalidate class=\"form-inline app-create-list-form\" ng-submit=\"creatListFormCtrl.createList()\">\n  <div class=\"form-group\">\n    <label for=\"name\">+ list +</label>\n    <input type=\"text\" name=\"name\" ng-model=\"createListFormCtrl.list.name\" required>\n  </div>\n  <button type=\"submit\" class=\"btn btn-default\"> + </button>\n</form>\n";
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(18);
+
+	var angular = __webpack_require__(6);
+
+	angular.module('noteList').directive('appDisplayList', function () {
+	  return {
+	    restrict: 'E',
+	    replace: true,
+	    controller: ['$log', 'listService', DisplayListController],
+	    controllerAs: 'displayListCtrl',
+	    bindToController: true,
+	    template: __webpack_require__(20),
+	    scope: {
+	      list: '='
+	    }
+	  };
+	});
+
+	function DisplayListController($log, listService) {
+	  this.deleteList = function () {
+	    $log.debug('deleteList function in DisplayListController');
+	    listService.deleteList(this.list._id).catch(function () {
+	      alert('failed to delete list');
+	    });
+	  };
+
+	  // this.createNote = function(data){
+	  //   $log.debug('createNote function in DisplayListController');
+	  //   listService.createNote(data)
+	  //   .then()
+	  //   .catch();
+	  // };
+	}
+
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 19 */,
+/* 20 */
+/***/ function(module, exports) {
+
+	module.exports = "<div class=\"app-display-list\">\n  <h2>{{displayListCtrl.list.name}}</h2>\n</div>\n";
 
 /***/ }
 /******/ ]);
