@@ -5,3 +5,6 @@ require('./scss/base.scss');
 
 const angular = require('angular');
 angular.module('noteApp', []);
+
+require('./service/list-service');
+require('./service/note-service');
