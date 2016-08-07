@@ -9,3 +9,7 @@ angular.module('demoApp', []);
 
 require('./service/list-service');
 require('./service/note-service');
+
+
+require('./component/create-list-form');
+require('./component/create-note-form');
