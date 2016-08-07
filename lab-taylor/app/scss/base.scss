@@ -3,3 +3,7 @@
 @import "vendor/font-awesome/scss/font-awesome.scss";
 
 @import "_theme.scss";
+
+h1 {
+  color: $app-dark;
+}
