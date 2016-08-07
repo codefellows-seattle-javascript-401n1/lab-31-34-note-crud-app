@@ -8,3 +8,5 @@ angular.module('noteApp', []);
 
 require('./service/list-service');
 require('./service/note-service');
+
+require('./component/main');

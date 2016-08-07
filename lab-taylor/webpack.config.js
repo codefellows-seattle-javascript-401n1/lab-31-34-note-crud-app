@@ -37,7 +37,7 @@ module.exports = {
     filename: 'bundle.js'
   },
   sassLoader: {
-    includePaths: [`${__dirname}/app/scss/lib`]
+    includePaths: [`${__dirname}/app/scss`]
   },
   postcss: function() {
     return [autoprefixer];
@@ -47,6 +47,10 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: ExtractText.extract('style', 'css!postcss!sass!')
+      },
+      {
+        test: /\.html$/,
+        loader: 'html'
       },
       {
         test: /\.js$/,
