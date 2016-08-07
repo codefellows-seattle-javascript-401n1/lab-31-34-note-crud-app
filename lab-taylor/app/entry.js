@@ -11,3 +11,5 @@ require('./service/note-service');
 
 require('./component/main');
 require('./component/list');
+require('./component/note-li');
+require('./component/create-list-form');

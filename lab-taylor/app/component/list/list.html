@@ -2,6 +2,6 @@
   <i class="fa fa-trash-o" ng-click="listCtrl.deleteList()"></i>
   <h2>{{listCtrl.list.name}}<h2>
   <ul>
-    <li ng-repeat="item in listCtrl.list.notes">{{item}}</li>
+    <app-note-li ng-repeat="item in listCtrl.list.notes" note="item" delete-note="listCtrl.deleteNote(noteId)">{{item}}</app-note-li>
   </ul>
 </div>
