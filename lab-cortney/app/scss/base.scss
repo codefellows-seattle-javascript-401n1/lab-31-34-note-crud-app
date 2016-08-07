@@ -1,0 +1,12 @@
+@import 'vendor/normalize.scss';
+@import 'vendor/bootstrap.scss';
+@import '_theme';
+
+body {
+  background-color: $stone;
+  color: $skyblue;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $deeppurple;
+}
