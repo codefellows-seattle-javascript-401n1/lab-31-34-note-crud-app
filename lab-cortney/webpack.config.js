@@ -1,11 +1,20 @@
 'use strict';
 
+const webpack = require('webpack');
+
 const autoprefixer = require('autoprefixer');
 const ExtractText = require('extract-text-webpack-plugin');
 
+const apiURL = process.env.API_URL || 'http://localhost:3000';
+
 module.exports = {
   entry: `${__dirname}/app/entry.js`,
-  plugins: new ExtractText('bundle.css'),
+  plugins: [
+    new ExtractText('bundle.css'),
+    new webpack.DefinePlugin({
+      __API_URL__: JSON.stringify(apiURL)
+    })
+  ],
   output: {
     path: 'build',
     filename: 'bundle.js'
