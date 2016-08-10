@@ -16,10 +16,11 @@ angular.module('noteList').directive('appCreateListForm', function(){
 });
 
 function CreateListFormController($log, listService){
-  this.list = [];
+  this.list = {};
 
   this.createList = function(){
     $log.debug('createList function in createList controller');
+    $log.log('this.list:', this.list);
     listService.createList(this.list)
     .then( () => {
       this.list = {};

@@ -69,7 +69,7 @@ function listService($log, $q, $http){
   service.deleteList = function(listId){
     $log.debug('deleteList in listService');
     return $q((resolve, reject) => {
-      $http.delete(`${url}/${listId}, config`)
+      $http.delete(`${url}/${listId}`, config)
       .then(res => {
         $log.log(`DELETE ${url}:${res.status} success!!`);
         this.lists.forEach((list, index) => {
