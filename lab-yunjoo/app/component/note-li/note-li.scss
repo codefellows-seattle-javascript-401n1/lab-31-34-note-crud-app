@@ -1,0 +1,21 @@
+@import "_theme";
+
+.app-note-li {
+  margin: 5px;
+  padding: 5px;
+  border: 5px solid $app-dark;
+
+  h2 {
+    background-color: #7a7a7a;
+    color: green;
+    text-shadow: 0px 0px 1px
+  }
+  p {
+    color: #bd9fa7;
+  }
+  .fa-trash-o {
+    position: static;
+    display: block;
+    color: black;
+  }
+}
