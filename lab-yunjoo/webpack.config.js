@@ -50,7 +50,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loader: ExtractText.extract('style','css!postcss!sass')
+        loader: ExtractText.extract('style','css!postcss!sass!')
       },
       {
         test:/\.js$/,
@@ -70,7 +70,7 @@ module.exports = {
       },
       {
         test: /\.svg.*/,
-        loader: 'url?limit=10000&mimetype=image/svg+sml&name=fonts/[name].[ext]'
+        loader: 'url?limit=10000&mimetype=image/svg+xml&name=fonts/[name].[ext]'
       },
       {
         test: /\.woff.*/,
