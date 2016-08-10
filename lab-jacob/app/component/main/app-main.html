@@ -1,8 +1,12 @@
 <main class="app-main">
   <header>
-    <h1>Note Cloud</h1>
+    <div class="listControl">
+      <h1>Note Cloud</h1>
+      <app-create-list-form></app-create-list-form>
+    </div>
   </header>
 
-  <app-create-list-form></app-create-list-form>
-  <app-display-list ng-repeat="item in appMainCtrl.lists" list="item"></app-display-list>
+  <section class="lists">
+    <app-display-list ng-repeat="item in appMainCtrl.lists" list="item"></app-display-list>
+  </section>
 </main>

@@ -1,0 +1,11 @@
+@import "_theme";
+
+.app-display-list {
+  border: thin solid $app-noteBorder;
+  border-radius: 20px 20px 0 0;
+  padding: 3% 3% 3% 3%;
+
+  h2 {
+    border-bottom: thin solid $app-noteBorder;
+  }
+}
