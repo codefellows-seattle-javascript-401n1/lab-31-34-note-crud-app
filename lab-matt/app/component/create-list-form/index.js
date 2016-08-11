@@ -16,16 +16,16 @@ angular.module('demoApp').directive('appCreateListForm', function() {
 });
 
 function CreateListFormController($log, listService){
-  this.lists = {};
+  this.list = {};
 
   this.createList = function(){
     $log.debug('createListFormCtrl.createList');
     $log.log('this.list', this.list);
-    listService.createList(this.list).then(()=> {
+    listService.createList(this.list).then( ()=> {
       this.list = {};
-    }).catch(() => {
+    }).catch( () => {
       this.list = {};
-      alert('I aint even gunna try dat');
+      alert('A name is required for a new list');
     });
   };
 }

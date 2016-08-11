@@ -6,15 +6,15 @@ angular.module('demoApp').factory('listService', ['$log', '$q', '$http', listSer
 
 function listService($log, $q, $http){
   let service = {};
-  let url = `${__API_URL__}/api/list`;
-  let config = {
+  service.lists = [];
+  const url = `${__API_URL__}/api/list`;
+  const config = {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     }
   };
 
-  service.lists=[];
 
   service.createList = function(data){
     $log.debug('listService.createList');
@@ -26,7 +26,7 @@ function listService($log, $q, $http){
         resolve(res.data);
       })
       .catch( err => {
-        $log.error(`POST ${url}:${err.status} failure! :'(`);
+        $log.error(`POST ${url}:${err.status} failure!`);
         reject(err);
       });
     });
@@ -39,10 +39,11 @@ function listService($log, $q, $http){
       .then( res => {
         $log.log(`GET ${url}:${res.status} success!`);
         this.lists = res.data;
+        console.log(res.data);
         resolve(this.lists);
       })
       .catch(err => {
-        $log.error(`GET ${url}:${err.status} failure! :'(`);
+        $log.error(`GET ${url}:${err.status} failure!`);
         reject(err);
       });
     });
@@ -70,7 +71,7 @@ function listService($log, $q, $http){
     $log.debug('listService.deteList');
     return $q((resolve, reject) => {
       $http.delete(`${url}/${listId}`, config)
-      .then((res) => {
+      .then(res => {
         $log.log(`DELETE ${url}:${res.status} success!`);
         this.lists.forEach((list, index) => {
           if(list._id === listId) this.lists.splice(index, 1);
@@ -83,4 +84,5 @@ function listService($log, $q, $http){
       });
     });
   };
+  return service;
 }

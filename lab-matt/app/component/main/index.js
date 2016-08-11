@@ -17,7 +17,7 @@ angular.module('demoApp').directive('appMain', function() {
 
 function MainController(listService){
   listService.fetchLists()
-  .then((lists) => {
+  .then(lists => {
     this.lists = lists;
   })
   .catch(() => {

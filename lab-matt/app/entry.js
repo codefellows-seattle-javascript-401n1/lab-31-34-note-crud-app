@@ -14,3 +14,4 @@ require('./component/main');
 require('./component/list');
 require('./component/create-list-form');
 require('./component/create-note-form');
+require('./component/note-li');
