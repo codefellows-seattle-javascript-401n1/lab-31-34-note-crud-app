@@ -1,0 +1,17 @@
+@import "_theme";
+
+.app-note-li {
+  margin:2px;
+  padding:2px;
+  border:0px 0px 1px $app-shadow;
+  h2{
+    // background-color: $app-light;
+    color:black;
+    text-shadow:1px solid $app-dark;
+    font-family: monospace;
+  }
+  .fa {
+    padding-top: 100px;
+    color: $app-default;
+  }
+}
