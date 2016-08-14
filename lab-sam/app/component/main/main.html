@@ -1,3 +1,4 @@
 <main class="app-main">
-  <h1> {{mainCtrl.list}} </h1>
+  <app-list-form></app-list-form>
+  <app-list ng-repeat="item in mainCtrl.lists" list="item"></app-list>
 </main>

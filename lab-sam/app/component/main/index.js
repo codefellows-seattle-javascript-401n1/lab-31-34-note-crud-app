@@ -8,18 +8,20 @@ angular.module('listApp').directive('appMain', function(){
     restrict: 'E',
     replace: true,
     template: require('./main.html'),
-    controller: [MainController],
+    controller: ['listService', MainController],
     controllerAs: 'mainCtrl',
     bindToController: true,
     scope: {},
   }
 });
 
-function MainController(list.service){
-  this.list = listService.list
-
+function MainController(listService){
   listService.fetchLists()
-  .then( list=> {
-    this.lists = listService.list;
+  .then( (lists)=> {
+    this.lists = lists;
+  })
+  .catch((err) => {
+    alert('Nope')
   });
+
 };

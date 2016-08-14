@@ -6,7 +6,6 @@ angular.module('listApp').factory('listService', ['$log', '$q', '$http', listSer
 
 function listService($log, $q, $http){
   let service = {};
-
   let url = `${__API_URL__}/api/list`;
   let config = {
     headers: {
@@ -15,12 +14,14 @@ function listService($log, $q, $http){
     },
   };
 
+  service.lists = [];
+
   service.createList = function(data){
-    $log.debug('listService.newList');
+    $log.debug('listS.newList');
     return $q((resolve, reject) => {
       $http.post( url, data, config)
       .then( res => {
-        $log.log(`POST ${url}:${res.status} success`);
+        $log.log(`POST success ${url}:${res.status}`);
 
         this.lists.push(res.data);
         resolve(res.data);
@@ -32,12 +33,12 @@ function listService($log, $q, $http){
     });
   };
 
-  service.fetchList = function(data){
-    $log.debug('listService.fetchList');
+  service.fetchLists = function(){
+    $log.debug('listS.fetchLists');
     return $q((resolve, reject) => {
       $http.get( url, config)
       .then( res => {
-        $log.log(`GET ${url}:${res.status} success`);
+        $log.log(`GET success ${url}:${res.status}`);
         this.lists = res.data;
         resolve(this.lists);
       })
@@ -49,11 +50,11 @@ function listService($log, $q, $http){
   };
 
   service.updateList = function(data){
-    $log.debug('listService.update');
+    $log.debug('listS.update');
     return $q((resolve, reject) => {
       $http.put(`${url}/${data._id}, data, config`)
         .then( lists => {
-          $log.log(`PUT ${url}:${err.status} success`);
+          $log.log(`PUT success ${url}:${err.status} `);
           this.lists.forEach((list, index) => {
             if (list._id === res.data._id) this.list[index] = res.data;
           });
@@ -62,6 +63,25 @@ function listService($log, $q, $http){
         .catch( err => {
           $log.console.error(`PUT failure ${url}:${err.status}`);
         });
+    });
+  };
+
+  service.deleteList = function(listId){
+    $log.debug('listS.deletelist, ID:', listId );
+    return $q((resolve, reject) => {
+      $http.delete(`${url}/${listId}`, config)
+      .then( res => {
+        $log.log(`DELETE success ${res.url}::${res.status}`);
+        this.lists.forEach((list, index) => {
+          if (list._id === listId) this.lists.splice(index, 1);
+          });
+        resolve(res.data);
+      })
+      .catch((err) => {
+        $log.log(`DELETE failure ${err.url}::${err.status}`);
+        $log.error(err);
+        reject(err);
+      });
     });
   };
 
