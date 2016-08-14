@@ -33,12 +33,21 @@ describe('testing ListController', () => {
       });
       this.httpBackend.flush();
     });
+  });
+
+  describe('testing listCtrl.deleteNote', () => {
+    beforeEach(() => {
+      this.listCtrl.list = {name: 'testList', notes: []};
+      this.httpBackend.expectDELETE(`${controllerUrl}/note/1234`)
+    .respond(200, {_id: '1234', name: 'testNote', content:'testContent'});
+    });
 
     it('should delete a note', () => {
       this.listCtrl.deleteNote('1234')
       .then(() => {
         expect(this.listCtrl.list.notes.length).toBe(0);
       });
+      this.httpBackend.flush();
     });
   });
 });
