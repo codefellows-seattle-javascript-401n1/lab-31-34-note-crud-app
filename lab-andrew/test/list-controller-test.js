@@ -12,10 +12,11 @@ describe('testing ListController', function() {
   it('should get listCtrl', () => {
     expect(typeof this.listCtrl).toBe('object');
     expect(typeof this.listCtrl.createNote).toBe('function');
+    // expect(typeof this.listCtrl.deleteNote).toBe('function');
   });
 
   describe('test listCtrl.createNote', () => {
-    let baseUrl = 'http//localhost:3000/api';
+    let baseUrl = 'http://localhost:3000/api';
 
     let headers = {
       'Content-Type': 'application/json',
@@ -31,8 +32,19 @@ describe('testing ListController', function() {
     it('should return a note', () => {
       this.listCtrl.createNote({name: 'troll', content: 'troll talk'})
       .then(note => {
+        console.log('note--------------------------------------------', note);
         expect(note.name).toBe('troll');
-      }).catch(err => {
+      });
+
+      this.$httpBackend.flush();
+    });
+  });
+
+  describe('test for listCtrl.deleteNote', () => {
+    beforeEach(() => {
+      this.listCtrl.deleteNote('2131223')
+      .then(() => {
+        expect(this.list.notes.length).toBe(0);
       });
       this.$httpBackend.flush();
     });

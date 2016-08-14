@@ -2,12 +2,14 @@
 
 require('./list.scss');
 const angular = require('angular');
-angular.module('noteApp').directive('appList', function(){
+const noteApp = angular.module('noteApp');
+
+noteApp.directive('appList', function(){
   return {
     restrict: 'E',
     replace: true,
     template: require('./list.html'),
-    controller: ['$log', 'listService', 'noteService', ListController],
+    controller: 'ListController',
     controllerAs: 'listCtrl',
     bindToController: true,
     scope: {
@@ -16,25 +18,33 @@ angular.module('noteApp').directive('appList', function(){
   };
 });
 
-function ListController($log, listService, noteService){
+noteApp.controller('ListController', ['$q', '$log', 'listService', 'noteService', ListController]);
+
+function ListController($q, $log, listService, noteService){
   this.deleteList = function(){
     $log.debug('listCtrl.deleteList');
     listService.deleteList(this.list._id)
     .catch(() => {
-      alert('you failed to deleteme yanoob');
+      alert('missed out on that one');
     });
   };
 
   this.createNote = function(data){
     $log.debug('listCtrl.createNote');
-    data.listId = this.list._id;
+    return $q((resolve, reject) => {
+      data.listId = this.list._id;
 
-    noteService.createNote(data)
-    .then( note => {
-      this.list.notes.push(note);
-    })
-    .catch( () => {
-      alert('dat soe daint werk awt awl');
+
+      noteService.createNote(data)
+      .then( note => {
+        this.list.notes.push(note);
+        resolve(note);
+
+      })
+    .catch( (err) => {
+      alert('still not working');
+      reject(err);
+    });
     });
   };
 
@@ -47,7 +57,7 @@ function ListController($log, listService, noteService){
       });
     })
     .catch(() => {
-      alert('DERRRRRNN');
+      alert('missed that one two');
     });
   };
 

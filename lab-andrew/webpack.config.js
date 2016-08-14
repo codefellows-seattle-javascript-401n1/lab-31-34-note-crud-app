@@ -1,5 +1,6 @@
 'use strict';
 
+
 const webpack = require('webpack');
 const CleanPlugin = require('clean-webpack-plugin');
 
@@ -9,6 +10,7 @@ const ExtractText = require('extract-text-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production';
 const apiURL = process.env.API_URL || 'http://localhost:3000';
+
 
 
 var plugins = [
