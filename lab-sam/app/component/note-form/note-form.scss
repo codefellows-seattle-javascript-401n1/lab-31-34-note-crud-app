@@ -1,10 +1,11 @@
 @import "_theme";
 
-.app-note-item {
+.app-note-form {
   float: left;
   background-color: $app-light;
   border-style: solid;
   border-radius: 8px;
   border-width: 3px;
   border-color: black;
+  font-size: 1em;
 }

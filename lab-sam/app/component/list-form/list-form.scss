@@ -1,4 +1,13 @@
 @import "_theme";
 
-.app-create-list-form {
+.app-list-form {
+  div {
+    float: left;
+    background-color: $app-light;
+    border-style: solid;
+    border-radius: 8px;
+    border-width: 3px;
+    border-color: black;
+    font-size: 1em;
+  }
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-// require('./list.scss');
+require('./list.scss');
 const angular = require('angular');
 angular.module('listApp').directive('appList', function(){
   return {

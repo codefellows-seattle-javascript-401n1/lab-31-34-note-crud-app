@@ -1,6 +1,6 @@
 'use strict';
 
-// require('./create-note-form.scss');
+require('./note-form.scss');
 const angular = require('angular');
 angular.module('listApp').directive('appNoteForm', function(){
   return {

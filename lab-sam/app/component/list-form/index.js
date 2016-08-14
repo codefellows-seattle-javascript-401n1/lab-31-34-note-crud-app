@@ -1,6 +1,6 @@
 'use strict';
 
-// require('./create-list.scss');
+require('./list-form.scss');
 const angular = require('angular');
 
 angular.module('listApp').directive('appListForm', function(){
