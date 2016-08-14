@@ -2,12 +2,13 @@
 
 require('./list.scss');
 const angular = require('angular');
-angular.module('noteApp').directive('appList', function() {
+const noteApp = angular.module('noteApp');
+noteApp.directive('appList', function() {
   return {
     restrict: 'E',
     replace: true,
     template: require('./list.html'),
-    controller: ['$log', 'listService', 'noteService', ListController],
+    controller: 'ListController',
     controllerAs: 'listCtrl',
     bindToController: true,
     scope: {
@@ -15,6 +16,8 @@ angular.module('noteApp').directive('appList', function() {
     }
   };
 });
+
+noteApp.controller('ListController', ['$q', '$log', 'listService', 'noteService', ListController]);
 
 function ListController($log, listService, noteService) {
   this.deleteList = function() {
