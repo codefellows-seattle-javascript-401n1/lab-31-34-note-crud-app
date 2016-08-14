@@ -7,6 +7,9 @@ const angular = require('angular');
 
 angular.module('noteApp', []);
 
+require('./service/list-service.js');
+require('./service/note-service.js');
+
 require('./component/app-main');
 require('./component/app-note');
 require('./component/app-list');

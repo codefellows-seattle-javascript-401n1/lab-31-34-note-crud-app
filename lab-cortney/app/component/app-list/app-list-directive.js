@@ -19,7 +19,7 @@ angular.module('noteApp').directive('appList', function() {
 function AppListController($log, listService, noteService) {
 
   this.deleteList = function() {
-    $log.debug('ListController.deleteList');
+    $log.debug('appListController.deleteList');
     listService.deleteList(this.list._id)
     .then(() => {
       $log.log('hooray list deletion worked');
@@ -30,7 +30,7 @@ function AppListController($log, listService, noteService) {
   };
 
   this.createNote = function(data) {
-    $log.debug('listCtrl.createNote');
+    $log.debug('appListCtrl.createNote');
     data.listId = this.list._id;
 
     noteService.createNote(data)
@@ -43,7 +43,7 @@ function AppListController($log, listService, noteService) {
   };
 
   this.deleteNote = function(noteId) {
-    $log.debug('listCtrl.deleteNote');
+    $log.debug('appListCtrl.deleteNote');
     noteService.deleteNote(noteId)
     .then(() => {
       this.list.notes.forEach((note, index) => {

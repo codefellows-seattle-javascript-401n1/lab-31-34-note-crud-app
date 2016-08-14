@@ -33,6 +33,22 @@ function listService($log, $q, $http) {
     });
   };
 
+  service.fetchLists = function() {
+    $log.debug('listService.fetchLists');
+    return $q((resolve, reject) => {
+      $http.get(url, config)
+      .then((res) => {
+        $log.log(`GET ${url}:${res.status} success`);
+        this.lists = res.data;
+        resolve(res.data);
+      })
+      .catch((err) => {
+        $log.log(`GET ${url}:${err.status} failure`);
+        reject(err);
+      });
+    });
+  };
+
   service.updateList = function(data) {
     $log.debug('listService.updateList');
     return $q((resolve, reject) => {

@@ -33,11 +33,13 @@ module.exports = {
   debug: !production,
   devTool: production ? false : 'eval',
   plugins: plugins,
-
   output: {
     path: 'build',
     filename: 'bundle.js'
   },
+  // sassLoader: {
+  //   includePaths: [`${__dirname}/app/scss/lib`]
+  // },
   postcss: function() {
     return [autoprefixer];
   },
