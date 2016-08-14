@@ -1,6 +1,5 @@
 'use strict';
 
-
 const webpack = require('webpack');
 const CleanPlugin = require('clean-webpack-plugin');
 
@@ -12,13 +11,12 @@ const production = process.env.NODE_ENV === 'production';
 const apiURL = process.env.API_URL || 'http://localhost:3000';
 
 
-
 var plugins = [
   new ExtractText('bundle.css'),
   new webpack.DefinePlugin({
     __API_URL__: JSON.stringify(apiURL),
-    __DEBUG__: JSON.stringify(!production)
-  })
+    __DEBUG__: JSON.stringify(!production),
+  }),
 ];
 
 if (production){
