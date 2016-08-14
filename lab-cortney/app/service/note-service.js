@@ -18,6 +18,7 @@ function noteService($log, $q, $http) {
 
   // add properties and methods to service
   service.createNote = function(data) {
+    $log.log('data passing thru', data);
     $log.debug('noteService.createNote');
     return $q((resolve, reject) => {
       $http.post(url, data, config)

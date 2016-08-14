@@ -16,6 +16,7 @@ angular.module('noteApp').directive('appList', function() {
   };
 });
 
+
 function AppListController($log, listService, noteService) {
 
   this.deleteList = function() {
