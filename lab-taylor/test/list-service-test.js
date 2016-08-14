@@ -35,7 +35,7 @@ describe('testing listService', function() {
   });
 
   it('fetchLists should return an array of lists', () => {
-    this.httpBackend.expectGET(baseUrl)
+    this.httpBackend.expectGET(baseUrl, {'Accept': 'application/json'})
     .respond(200, [{_id: '0', name: 'testList', notes: []}]);
 
     this.listService.fetchLists()
@@ -48,7 +48,7 @@ describe('testing listService', function() {
   });
 
   it('deleteList should return the deleted list', () => {
-    this.httpBackend.expectDELETE(`${baseUrl}/1234`)
+    this.httpBackend.expectDELETE(`${baseUrl}/1234`, {'Accept': 'application/json'})
     .respond(204, {_id:'1234', name:'testList', notes:[]});
 
     this.listService.deleteList('1234')
