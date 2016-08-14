@@ -11,6 +11,6 @@ const angular = require('angular');
 angular.module('noteApp', []);
 
 // angular services
-
+require('./service/list-service');
 // angular components
 require('./component/main');
