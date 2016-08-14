@@ -13,7 +13,6 @@ function noteService($log, $q, $http){
     }
   };
 
-  // service.lists = [];
   service.createNote = function(data){
     $log.debug('noteService.createNote');
     return $q((resolve,reject) => {
