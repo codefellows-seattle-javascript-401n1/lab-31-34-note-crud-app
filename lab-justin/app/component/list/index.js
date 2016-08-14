@@ -22,7 +22,7 @@ function ListController($log, listService, noteService){
     $log.debug('listCtrl.deleteList');
     listService.deleteList(this.list._id)
     .catch(()=>{
-      alert('listCtrl.deleteList: failed to delete');
+      alert('listCtrl.deleteList: failed to delete list');
     });
   };
   this.createNote = function(data){
@@ -30,7 +30,7 @@ function ListController($log, listService, noteService){
     data.listId = this.list._id;
     noteService.createNote(data)
     .then( note => {
-      this.list.notes.push(note);//or (data)
+      this.list.notes.push(note);//if i use (note) -> note- form doesn't work???
     })
     .catch( () => {
       alert('listCtrl.createNote: failed to create');
@@ -40,12 +40,12 @@ function ListController($log, listService, noteService){
     $log.debug('listCtrl.deleteNote');
     noteService.deleteNote(noteId)
     .then( () => {
-      this.list.notes.forEach((note, index)=> {
-        if(note._id === noteId) return this.list.notes.splice(index, 1);
+      this.list.notes.forEach( (note, index)=> {
+        if(note._id ===noteId) return this.list.notes.splice(index, 1);
       });
     })
     .catch( () => {
-      alert('listCtrl.deleteNote: failed to create');
+      alert('listCtrl.deleteNote: failed to delete note');
     });
   };
 }

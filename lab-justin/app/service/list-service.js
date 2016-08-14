@@ -18,12 +18,12 @@ function listService($log, $q, $http){
     return $q((resolve, reject) => {
       $http.post(url , data, config)
       .then( res  => {
-        $log.log(`POST ${url}:${res.status} POST-success!`);
+        $log.log(`POST ${url}:${res.status} listService.createList: POST-success!`);
         this.lists.push(res.data);
         resolve(res.data);
       })
       .catch( err => {
-        $log.error(`POST ${url}:${err.status} POST-failure!`);
+        $log.error(`POST ${url}:${err.status} listService.createList: POST-failure!`);
         reject(err);
       });
     });
@@ -33,12 +33,12 @@ function listService($log, $q, $http){
     return $q((resolve, reject) => {
       $http.get(url, config)
         .then( res => {
-          $log.log(`GET ${url}:${res.status} GET-success!`);
+          $log.log(`GET ${url}:${res.status} listService.fetchLists: GET-success!`);
           this.lists = res.data;
           resolve(this.lists);
         })
         .catch( err => {
-          $log.error(`GET ${url}:${err.status} GET-failure!`);
+          $log.error(`GET ${url}:${err.status} listService.fetchLists: GET-failure!`);
           reject(err);
         });
     });
@@ -49,33 +49,32 @@ function listService($log, $q, $http){
     return $q((resolve, reject) => {
       $http.put(`${url}/${data._id}`, data, config)
         .then( lists => {
-          $log.log(`PUT ${url}:${res.status} PUT-success!`);
+          $log.log(`PUT ${url}:${res.status} listService.updateList: PUT-success!`);
           this.lists.forEach((list, index) => {
             if (list._id === res.data._id) return this.lists[index] = res.data;
           });
           resolve(res.data);
         })
         .catch( err => {
-          $log.error(`PUT ${url}:${err.status} PUT-failure!`);
+          $log.error(`PUT ${url}:${err.status} listService.updateList: PUT-failure!`);
           reject(err);
         });
     });
   };
-
   service.deleteList = function(listId){
     $log.debug('listService.deleteList');
     let res;
     return $q((resolve, reject) => {
       $http.delete(`${url}/${listId}`, config)
       .then((res) =>{
-        $log.log(`DELETE ${url}:${res.status} DELETE-success!`);
+        $log.log(`DELETE ${url}:${res.status} listService.deleteList: DELETE-success!`);
         this.lists.forEach((list, index) => {
           if(list._id===listId) return this.lists.splice(index, 1);
         });
         resolve(res.data);
       })
       .catch((err) => {
-        $log.log(`DELETE ${url}:${res.status} DELETE-failure!`);
+        $log.log(`DELETE ${url}:${res.status} listService.deleteList: DELETE-failure!`);
         reject(err);
       });
     });

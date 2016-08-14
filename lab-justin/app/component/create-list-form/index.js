@@ -23,6 +23,7 @@ function CreateListFormController($log, listService){
     listService.createList(this.list)
       .then( ()=> {
         this.list = {};
+        // $log.log('res.data', res.data);
       })
       .catch( ()=> {
         this.list = {};
