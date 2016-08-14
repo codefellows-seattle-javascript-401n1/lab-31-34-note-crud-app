@@ -51,10 +51,11 @@ function AppListController($log, listService, noteService) {
         if (note._id === noteId) {
           this.list.notes.splice(index, 1);
         }
-      })
-      .catch(() => {
-        alert('well that didn\'t delete');
       });
+    })
+    .catch(() => {
+      alert('well that didn\'t delete');
     });
   };
+
 }

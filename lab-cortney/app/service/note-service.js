@@ -36,17 +36,19 @@ function noteService($log, $q, $http) {
 
   service.deleteNote = function(noteId) {
     $log.debug('noteService.deleteNote');
-    $http.delete(`${url}/${noteId}`, config)
-    .then(res => {
-      $log.log(`DELETE ${res.url}::${res.status} succeeded`);
-      resolve(res.data);
-    })
-    .catch(err => {
-      $log.log(`DELETE ${err.url}::${err.status} failed :<`);
-      $log.error(err);
-      reject(err);
+    return $q((resolve, reject) => {
+      $http.delete(`${url}/${noteId}`, config)
+      .then(res => {
+        $log.log(`DELETE ${res.url}::${res.status} succeeded`);
+        resolve(res.data);
+      })
+      .catch(err => {
+        $log.log(`DELETE ${err.url}::${err.status} failed :<`);
+        $log.error(err);
+        reject(err);
+      });
     });
-  }
+  };
 
   return service;
 }
