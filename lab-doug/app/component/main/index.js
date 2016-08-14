@@ -8,13 +8,15 @@ angular.module('noteApp').directive('appMain', function(){
     restrict: 'E',
     replace: true,
     template: require('./main.html'),
-    controller: [MainController],
+    controller: ['listService', MainController],
     controllerAs: 'mainCtrl',
     bindToController: true,
-    scope: {},
-  }
+    scope: {}
+  };
 });
 
-function MainController(){
-  this.example = 'hello world';
-};
+function MainController(listService){
+  listService.createList({name: 'repairs'})
+    .then(list => this.list = list)
+    .catch(console.error);
+}
