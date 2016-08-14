@@ -16,4 +16,29 @@ describe('testing ListController', () => {
     expect(typeof this.listCtrl.createNote).toBe('function');
     expect(typeof this.listCtrl.deleteNote).toBe('function');
   });
+
+  describe('testing listCtrl.createNote', () => {
+    beforeEach(() => {
+      this.listCtrl.list = {name: 'testList', notes: []};
+      this.httpBackend.expectPOST(`${controllerUrl}/note`, {name: 'testNote', content: 'testContent'})
+      .respond(200, {_id: '1234', name: 'testNote', content:'testContent'});
+    });
+
+    it('should return a list', () => {
+      this.listCtrl.createNote({name:'testNote', content:'testContent'})
+      .then(note => {
+        expect(note.name).toBe('testNote');
+        expect(note.content).toBe('testContent');
+        expect(this.listCtrl.list.notes[0].name).toBe('testNote');
+      });
+      this.httpBackend.flush();
+    });
+
+    it('should delete a note', () => {
+      this.listCtrl.deleteNote('1234')
+      .then(() => {
+        expect(this.listCtrl.list.notes.length).toBe(0);
+      });
+    });
+  });
 });

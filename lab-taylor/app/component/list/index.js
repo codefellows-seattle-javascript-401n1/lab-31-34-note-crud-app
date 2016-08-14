@@ -19,7 +19,7 @@ noteApp.directive('appList', function() {
 
 noteApp.controller('ListController', ['$q', '$log', 'listService', 'noteService', ListController]);
 
-function ListController($log, listService, noteService) {
+function ListController($q, $log, listService, noteService) {
   this.deleteList = function() {
     $log.debug('listCtrl.deleteList');
     listService.deleteList(this.list._id)
@@ -28,22 +28,34 @@ function ListController($log, listService, noteService) {
 
   this.createNote = function(data) {
     $log.debug('listCtrl.createNote');
-    data.listId = this.list._id;
-    noteService.createNote(data)
-    .then(note => {
-      this.list.notes.push(note);
-    })
-    .catch(() => alert('The note was note craeted'));
+    return $q((resolve, reject) => {
+      data.listId = this.list._id;
+      noteService.createNote(data)
+      .then( note => {
+        this.list.notes.push(note);
+        resolve(note);
+      })
+      .catch( (err) => {
+        alert('The note was note created');
+        reject(err);
+      });
+    });
   };
 
   this.deleteNote = function(noteId) {
     $log.debug('listCtrl.deleteNote');
-    noteService.deleteNote(noteId)
-    .then(() => {
-      this.list.notes.forEach((note, idx) => {
-        if (note._id === noteId) this.list.notes.splice(idx, 1);
+    return $q((resolve, reject) => {
+      noteService.deleteNote(noteId)
+      .then(() => {
+        this.list.notes.forEach((note, idx) => {
+          if (note._id === noteId) this.list.notes.splice(idx, 1);
+        });
+        resolve();
+      })
+      .catch(() => {
+        alert('could not delete');
+        reject();
       });
-    })
-    .catch(() => alert('could not delete'));
+    });
   };
 }
