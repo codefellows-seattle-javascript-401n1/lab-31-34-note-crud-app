@@ -22,6 +22,7 @@ function noteService($log, $q, $http){
       $http.post(url, data, config)
       .then( res => {
         $log.log(`POST ${res.url}::${res.status} success!`);
+        console.log(res.data);
         resolve(res.data);
       })
       .catch(err => {
@@ -48,6 +49,5 @@ function noteService($log, $q, $http){
     });
   };
 
-  // return service
   return service;
 }

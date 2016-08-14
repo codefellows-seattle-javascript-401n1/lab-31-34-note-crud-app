@@ -3,12 +3,14 @@
 require('./list.scss');
 
 const angular = require('angular');
-angular.module('demoApp').directive('appList', function() {
+const demoApp = angular.module('demoApp');
+
+demoApp.directive('appList', function(){
   return {
     restrict: 'E',
     replace: true,
     template: require('./list.html'),
-    controller: ['$log', 'listService', 'noteService', ListController],
+    controller: 'ListController',
     controllerAs: 'listCtrl',
     bindToController: true,
     scope: {
@@ -17,7 +19,9 @@ angular.module('demoApp').directive('appList', function() {
   };
 });
 
-function ListController($log, listService, noteService){
+demoApp.controller('ListController', ['$q', '$log', 'listService', 'noteService', ListController]);
+
+function ListController($q, $log, listService, noteService){
   this.deleteList = function(){
     console.log(this.list);
     $log.debug('listCtrl.deleteList');
@@ -26,15 +30,20 @@ function ListController($log, listService, noteService){
     });
   };
 
-  this.createNote = function(data) {
+  this.createNote = function(data){
     $log.debug('listCtrl.createNote');
-    data.listId = this.list._id;
-    noteService.createNote(data)
-    .then(note => {
-      this.list.notes.push(note);
-    })
-    .catch(()=> {
-      alert('Could not create a new note');
+    return $q((resolve, reject) => {
+      data.listId = this.list._id;
+
+      noteService.createNote(data)
+      .then( note => {
+        this.list.notes.push(note);
+        resolve(note);
+      })
+      .catch( (err) => {
+        alert('Could not create note.  Make sure all fields are filled');
+        reject(err);
+      });
     });
   };
 

@@ -23,6 +23,7 @@ function listService($log, $q, $http){
       .then( res => {
         $log.log(`POST ${url}:${res.status} success!`);
         this.lists.push(res.data);
+        console.log(res.data);
         resolve(res.data);
       })
       .catch( err => {
