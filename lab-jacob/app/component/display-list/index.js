@@ -2,12 +2,13 @@
 require('./app-display-list.scss');
 
 const angular = require('angular');
+const app = angular.module('noteList');
 
-angular.module('noteList').directive('appDisplayList', function(){
+app.directive('appDisplayList', function(){
   return {
     restrict: 'E',
     replace: true,
-    controller: ['$log', 'listService', 'noteService', DisplayListController],
+    controller: 'DisplayListController',
     controllerAs: 'displayListCtrl',
     bindToController: true,
     template: require('./app-display-list.html'),
@@ -17,7 +18,9 @@ angular.module('noteList').directive('appDisplayList', function(){
   };
 });
 
-function DisplayListController($log, listService, noteService){
+app.controller('DisplayListController', ['$q', '$log', 'listService', 'noteService', DisplayListController]);
+
+function DisplayListController($q, $log, listService, noteService){
   this.deleteList = function(){
     $log.debug('deleteList function in DisplayListController');
     listService.deleteList(this.list._id)
@@ -28,14 +31,17 @@ function DisplayListController($log, listService, noteService){
 
   this.createNote = function(data){
     $log.debug('createNote function in displayListController');
-    data.listId = this.list._id;
-
-    noteService.createNote(data)
-    .then(note => {
-      this.list.notes.push(note);
-    }).catch(err => {
-      $log.error(err);
-      alert('somethings wrong in createNote');
+    return $q((resolve, reject) => {
+      data.listId = this.list._id;
+      noteService.createNote(data)
+      .then(note => {
+        this.list.notes.push(note);
+        resolve(note);
+      }).catch(err => {
+        $log.error(err);
+        alert('somethings wrong in createNote');
+        reject(err);
+      });
     });
   };
 
