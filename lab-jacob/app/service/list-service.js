@@ -6,9 +6,10 @@ angular.module('noteList').factory('listService', ['$log', '$q', '$http', listSe
 
 function listService($log, $q, $http){
   let service = {};
+
   let url = `${__API_URL__}/api/list`;
   let config = {
-    header: {
+    headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     }
