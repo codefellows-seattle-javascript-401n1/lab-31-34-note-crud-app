@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Sun Aug 14 2016 09:23:03 GMT-0700 (PDT)
+// Generated on Wed Aug 10 2016 19:14:08 GMT-0700 (PDT)
 'use strict';
 
 const webpackConfig = require('./webpack.config');
@@ -32,6 +32,7 @@ module.exports = function(config) {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    webpack: webpackConfig,
     preprocessors: {
       'app/entry.js': ['webpack'],
       'test/*-test.js': ['babel']
