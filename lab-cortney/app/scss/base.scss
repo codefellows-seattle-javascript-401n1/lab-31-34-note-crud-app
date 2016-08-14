@@ -1,0 +1,24 @@
+@import 'vendor/normalize.scss';
+@import 'vendor/bootstrap.scss';
+@import '_theme';
+
+body {
+  background-color: $stone;
+  color: $skyblue;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: $deeppurple;
+}
+
+.delete {
+  display: inline;
+  color: $chocolatemilk;
+  border: 1px solid $chocolatemilk;
+  margin: 1px;
+  padding: 2px;
+}
+
+ul {
+  list-style: none;
+}
