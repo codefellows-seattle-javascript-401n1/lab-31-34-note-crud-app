@@ -8,16 +8,19 @@ angular.module('noteApp').directive('appMain', function(){
     restrict: 'E',
     replace: true,
     template: require('./main.html'),
-    controller: [MainController],
+    controller: ['$log', 'listService', MainController],
     controllerAs: 'mainCtrl',
     bindToController: true,
-    scope: {},
-  }
+    scope: {}
+  };
 });
 
-function MainController(){
+function MainController($log, listService){
   this.apiURL = __API_URL__;
 
-  //TODO: add listService.getLists()
-  // Don't forget to inject $log and listService above!
-};
+  listService.getLists()
+    .then((lists) => {
+      this.lists = listService.lists;
+    })
+    .catch((err) => $log.error(err));
+}

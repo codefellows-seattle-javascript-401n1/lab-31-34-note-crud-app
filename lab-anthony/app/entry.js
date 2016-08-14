@@ -15,3 +15,5 @@ require('./service/list-service.js');
 
 // angular components
 require('./component/main');
+require('./component/list');
+require('./component/create-list-form');

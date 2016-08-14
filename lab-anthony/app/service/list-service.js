@@ -2,7 +2,7 @@
 
 const angular = require('angular');
 
-angular.module('noteApp').factory('listService', ['q', '$log', '$http', listService]);
+angular.module('noteApp').factory('listService', ['$q', '$log', '$http', listService]);
 
 function listService($q, $log, $http){
   const service = {};
@@ -13,6 +13,21 @@ function listService($q, $log, $http){
       'Content-Type': 'application/json',
       'Accept': 'application/json'
     }
+  };
+
+  service.getLists = function(){
+    $log.debug('listService.getLists');
+
+    return $q((resolve, reject) => {
+      $http.get(`${__API_URL__}/api/list`, requestConfig)
+      .then((res) => {
+        this.lists = res.data;
+        resolve(this.lists);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+    });
   };
 
   service.createList = function(data){
@@ -31,5 +46,7 @@ function listService($q, $log, $http){
       });
     });
   };
+
+  return service;
 
 }
