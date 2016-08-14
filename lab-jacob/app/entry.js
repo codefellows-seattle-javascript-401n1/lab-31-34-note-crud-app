@@ -9,8 +9,11 @@ angular.module('noteList', []);
 
 //services
 require('./service/list-service.js');
+require('./service/note-service.js');
 
 //components
 require('./component/main');
 require('./component/create-list-form');
 require('./component/display-list');
+require('./component/create-note-form');
+require('./component/display-note');

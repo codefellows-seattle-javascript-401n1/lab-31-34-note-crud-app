@@ -1,4 +1,10 @@
 <div class="app-display-list">
   <button ng-click="displayListCtrl.deleteList()"></button>
   <h2>{{displayListCtrl.list.name}}</h2>
+  <ul class="notes">
+    <li>
+    <app-display-note ng-repeat="item in displayListCtrl.list.notes" note="item" delete-note="displayListCtrl.deleteNote(noteId)"></app-display-note>
+    <app-create-note-form create-note="displayListCtrl.createNote(note)"></app-create-note-form>
+    </ul>
+  </ul>
 </div>
