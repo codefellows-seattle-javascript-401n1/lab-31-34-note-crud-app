@@ -1,0 +1,13 @@
+<form class="app-create-note" novalidate
+ng-submit="createNote({note: note})">
+
+<div class="form-group">
+  <label for="content">Content:</label>
+  <input type="text"
+  class="form-control"
+  name="content"
+  ng-model="note.content">
+</div>
+<button class="btn btn-default" type="submit"> + </button>
+
+</form>

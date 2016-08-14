@@ -6,6 +6,8 @@ angular.module('noteApp').directive('appCreateNote', function() {
     restrict: 'E',
     replace: true,
     template: require('./app-create-note.html'),
-    scope: {}
+    scope: {
+      createNote: '&'
+    }
   };
 });

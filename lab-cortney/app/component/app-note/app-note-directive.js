@@ -6,6 +6,22 @@ angular.module('noteApp').directive('appNote', function() {
     restrict: 'E',
     replace: true,
     template: require('./app-note.html'),
-    scope: {}
+    controller: ['$log', 'noteService', AppNoteController],
+    controllerAs: 'appNoteCtrl',
+    bindToController: true,
+    scope: {
+      note: '=',
+      deleteNote: '&'
+    }
   };
 });
+
+function AppNoteController($log, noteService) {
+
+  // this.note = {};
+  //
+  // this.deleteNote = function() {
+  //   $log.debug('AppNoteController.deleteNote');
+  //
+  // }
+}
