@@ -10,9 +10,9 @@ function noteService($log, $q, $http){
   let config = {
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      'Accept': 'application/json'
     }
-  }
+  };
   service.createNote = function(data){
     $log.debug('noteS.createNote');
     return $q((resolve, reject) => {
@@ -27,7 +27,7 @@ function noteService($log, $q, $http){
         reject(err);
       });
     });
-  }
+  };
 
   service.deleteNote = function(noteId){
     $log.debug('noteS.deleteNote');

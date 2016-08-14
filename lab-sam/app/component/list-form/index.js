@@ -11,9 +11,9 @@ angular.module('listApp').directive('appListForm', function(){
     controller: ['$log', 'listService', ListFormController],
     controllerAs: 'listFormCtrl',
     bindToController: true,
-    scope: {},
-  }
-})
+    scope: {}
+  };
+});
 
 function ListFormController($log, listService){
   this.list = {};
@@ -28,5 +28,5 @@ function ListFormController($log, listService){
       this.list = {};
       alert('NOT ALLOWED!');
     });
-  }
+  };
 }

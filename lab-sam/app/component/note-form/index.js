@@ -8,7 +8,7 @@ angular.module('listApp').directive('appNoteForm', function(){
     replace: true,
     template: require('./note-form.html'),
     scope: {
-      createNote: '&',
-    },
-  }
+      createNote: '&'
+    }
+  };
 });

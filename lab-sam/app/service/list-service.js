@@ -10,8 +10,8 @@ function listService($log, $q, $http){
   let config = {
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
-    },
+      'Accept': 'application/json'
+    }
   };
 
   service.lists = [];
@@ -29,7 +29,7 @@ function listService($log, $q, $http){
       .catch( err => {
         $log.error(`POST failure ${url}:${err.status}`);
         reject(err);
-      })
+      });
     });
   };
 
@@ -45,7 +45,7 @@ function listService($log, $q, $http){
       .catch( err => {
         $log.error(`GET failure ${url}:${err.status}`);
         reject(err);
-      })
+      });
     });
   };
 
@@ -62,6 +62,7 @@ function listService($log, $q, $http){
         })
         .catch( err => {
           $log.console.error(`PUT failure ${url}:${err.status}`);
+          reject(err);
         });
     });
   };
@@ -74,7 +75,7 @@ function listService($log, $q, $http){
         $log.log(`DELETE success ${res.url}::${res.status}`);
         this.lists.forEach((list, index) => {
           if (list._id === listId) this.lists.splice(index, 1);
-          });
+        });
         resolve(res.data);
       })
       .catch((err) => {

@@ -1,7 +1,7 @@
 'use strict';
 
 // require('./note-li.scss');
-const angular = require('angular')
+const angular = require('angular');
 angular.module('listApp').directive('appNoteItem', function(){
   return {
     restrict: 'E',
@@ -12,9 +12,9 @@ angular.module('listApp').directive('appNoteItem', function(){
     bindToController: true,
     scope: {
       note: '=',
-      deleteNote: '&',
+      deleteNote: '&'
     }
-  }
+  };
 });
 
 function NoteItemController(){

@@ -11,9 +11,9 @@ angular.module('listApp').directive('appList', function(){
     controllerAs: 'listCtrl',
     bindToController: true,
     scope: {
-      list: '=',
-    },
-  }
+      list: '='
+    }
+  };
 });
 
 function ListController($log, listService, noteService){
@@ -35,8 +35,8 @@ function ListController($log, listService, noteService){
     })
     .catch( () => {
       alert('I Know No new Note');
-    })
-  }
+    });
+  };
 
   this.deleteNote = function(noteId){
     $log.debug('listCtrl.deleteNote');
@@ -48,6 +48,6 @@ function ListController($log, listService, noteService){
     })
     .catch(() => {
       alert('the note remains');
-    })
+    });
   };
 }

@@ -11,8 +11,8 @@ angular.module('listApp').directive('appMain', function(){
     controller: ['listService', MainController],
     controllerAs: 'mainCtrl',
     bindToController: true,
-    scope: {},
-  }
+    scope: {}
+  };
 });
 
 function MainController(listService){
@@ -21,7 +21,7 @@ function MainController(listService){
     this.lists = lists;
   })
   .catch((err) => {
-    alert('Nope')
+    alert('Nope');
   });
 
-};
+}
