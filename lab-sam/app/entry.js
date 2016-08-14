@@ -8,7 +8,7 @@ require('./scss/base.scss');
 const angular = require('angular');
 
 // angular modules
-angular.module('demoApp', []);
+angular.module('listApp', []);
 
 // angular services
 

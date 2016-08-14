@@ -15,6 +15,11 @@ angular.module('listApp').directive('appMain', function(){
   }
 });
 
-function MainController(){
-  this.example = 'hello world';
+function MainController(list.service){
+  this.list = listService.list
+
+  listService.fetchLists()
+  .then( list=> {
+    this.lists = listService.list;
+  });
 };
