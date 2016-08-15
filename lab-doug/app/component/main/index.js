@@ -3,7 +3,7 @@ require('./main.scss');
 
 const angular = require('angular');
 
-angular.module('noteApp').directive('appMain', function(){
+angular.module('listApp').directive('appMain', function(){
   return {
     restrict: 'E',
     replace: true,
