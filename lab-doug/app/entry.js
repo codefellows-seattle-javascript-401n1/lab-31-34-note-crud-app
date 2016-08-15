@@ -8,7 +8,7 @@ require('./scss/base.scss');
 const angular = require('angular');
 
 // angular modules
-angular.module('noteApp', []);
+angular.module('listApp', []);
 
 // angular services
 require('./service/list-service');
