@@ -14,3 +14,4 @@ angular.module('listApp', []);
 require('./service/list-service');
 // angular components
 require('./component/main');
+require('./component/create-list-form');
