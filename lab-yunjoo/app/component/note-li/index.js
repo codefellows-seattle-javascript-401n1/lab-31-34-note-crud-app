@@ -17,6 +17,6 @@ angular.module('demoApp').directive('appNoteLi', function(){
   };
 });
 
-function NoteLiController(){
+function NoteLiController($log,noteService){
 
 }
