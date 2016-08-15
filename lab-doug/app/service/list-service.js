@@ -14,6 +14,7 @@ function listService($log, $q, $http){
    * anyone who accesses our service will be accessing this object, which we return at the end of this factory function
    */
   let service = {};
+  service.lists = [];
   let config = {
     headers: {
       'Content-Type': 'application/json',
@@ -27,7 +28,8 @@ function listService($log, $q, $http){
       $http.post(`${__API_URL__}/api/list`, data, config)
       .then(res => {
         $log.log('listService.createList succeeded');
-        resolve(res.data);
+        this.lists.push(res.data);
+        resolve(this.lists);
       })
       .catch(err => {
         $log.error('listService.createList failed');
@@ -44,7 +46,8 @@ function listService($log, $q, $http){
       })
       .then(res => {
         $log.log('listService.fetchLists succeeded');
-        resolve(res.data);
+        this.lists = res.data;
+        resolve(this.lists);
       })
       .catch( err => {
         $log.error('listService.fetchLists failed');
@@ -56,9 +59,14 @@ function listService($log, $q, $http){
   service.updateList = function(data){
     $log.debug('listService.updateList');
     return $q((resolve, reject) => {
-      $http.put(`${__API_URL__}/api/list/${data.id}`, data, config)
+      $http.put(`${__API_URL__}/api/list/${data._id}`, data, config)
       .then(res => {
         $log.log('listService.updateList succeeded');
+        this.list.forEach((list, index) => {
+          if(list._id === res.data._id){
+            this.lists[index] = res.data;
+          }
+        });
         resolve(res.data);
       })
       .catch(err => {

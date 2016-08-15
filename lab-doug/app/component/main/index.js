@@ -16,7 +16,7 @@ angular.module('listApp').directive('appMain', function(){
 });
 
 function MainController(listService){
-  listService.createList({name: 'repairs'})
+  listService.fetchLists()
     .then(list => this.list = list)
     .catch(console.error);
 }
