@@ -1,6 +1,7 @@
 'use strict';
 require('./create-list-form.scss');
 const angular = require('angular');
+
 angular.module('listApp').directive('createListForm', function(){
   return {
     restrict: 'E',
@@ -14,7 +15,9 @@ angular.module('listApp').directive('createListForm', function(){
 });
 
 function CreateListFormController($log, listService){
+
   $log.debug('entered CreateListFormController');
+  this.list = {};
   this.createList = function(){
     $log.debug('entered createListFormCtrl.createList');
     listService.createList(this.list)

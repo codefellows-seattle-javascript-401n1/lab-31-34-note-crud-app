@@ -15,8 +15,13 @@ angular.module('listApp').directive('appMain', function(){
   };
 });
 
+/**
+ * MainController - populates the user page with lists
+ *
+ * @param  {angular service} listService is a globally available service used for list CRUD
+ * @return {array of lists}             updates the main template with updated lists when changes are made in the lists
+ */
 function MainController(listService){
-  listService.fetchLists()
-    .then(list => this.list = list)
-    .catch(console.error);
+  this.lists = listService.lists;
+  listService.fetchLists();
 }
