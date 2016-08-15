@@ -30,7 +30,10 @@
     "beforeEach": false,
     "afterEach": false,
     "before": false,
-    "after": false
+    "after": false,
+    "expect": false,
+    "angular": false,
+    "__DEBUG__": false
   },
   "ecmaFeatures": {
     "modules": true,

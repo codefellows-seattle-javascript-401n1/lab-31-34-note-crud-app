@@ -18,5 +18,6 @@ angular.module('galleryApp').directive('appNoteLi', function(){
 });
 
 function NoteLiController(){
+//edit note goes here!
 
 }

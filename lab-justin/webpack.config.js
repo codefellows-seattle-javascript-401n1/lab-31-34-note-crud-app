@@ -10,7 +10,8 @@ const apiURL = process.env.API_URL || 'http://localhost:3000';
 var plugins = [
   new ExtractText('bundle.css'),
   new webpack.DefinePlugin({
-    __API_URL__: JSON.stringify(apiURL)
+    __API_URL__: JSON.stringify(apiURL),
+    __DEBUG__: JSON.stringify(!production)
   })
 ];
 
@@ -40,7 +41,7 @@ module.exports = {
   },
   postcss: function(){
     return [autoprefixer];
-  }, 
+  },
   module: {
     loaders: [
       {

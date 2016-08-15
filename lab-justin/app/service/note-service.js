@@ -22,7 +22,7 @@ function noteService($log, $q, $http){
         $log.log('res.data', res.data);
         resolve(res.data);
       })
-      .catch (err => {
+      .catch ( err => {
         $log.log(`POST ${url}: ${err.status} noteService.createNote: POST-failure!`);
         $log.error(err);
         reject(err);
@@ -34,12 +34,11 @@ function noteService($log, $q, $http){
     $log.log('noteId', noteId.noteId);
     return $q((resolve,reject) => {
       $http.delete(`${url}/${noteId}`, config)
-      // $http.delete(`${url}/${noteId.noteId}`, config)
       .then( res => {
         $log.log(`DELETE ${url}: ${res.status} noteService.deleteNote: DELETE-success!`);
         resolve(res.data);
       })
-      .catch (err => {
+      .catch ( err => {
         $log.error(`DELETE ${url}: ${err.status} noteService.deleteNote: DELETE-failure!`);
         $log.error(err);
         reject(err);
