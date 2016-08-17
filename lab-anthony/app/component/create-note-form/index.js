@@ -1,5 +1,6 @@
 'use strict';
 
+require('./create-note-form.scss');
 const angular = require('angular');
 const noteApp = angular.module('noteApp');
 
