@@ -27,4 +27,6 @@ function noteService($q, $log, $http){
   };
 
   ///// TODO: deleteNote /////
+
+  return service;
 }

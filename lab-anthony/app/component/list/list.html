@@ -2,11 +2,10 @@
   <h2>{{listCtrl.list.name}}</h2>
   <i class="fa fa-pencil fa-2x app-edit-list-btn"></i>
   <i ng-click="listCtrl.deleteList(listCtrl.list._id)" class="fa fa-trash-o fa-2x app-delete-list-btn"></i>
-  <!-- <h2></h2> -->
   <ul>
-    <!-- <app-note-li></app-note-li> -->
-    <!-- <li>
+    <!-- <app-note ng-repeat="item in listCtrl.list.notes" note="item"></app-note> -->
+    <li>
       <app-create-note-form></app-create-note-form>
-    </li> -->
+    </li>
   </ul>
 </div>
