@@ -1,0 +1,7 @@
+<form novalidate ng-submit="createListFormCtrl.createList()" class="form-inline app-create-list-form">
+  <div class="form-group">
+    <label for="title">Create List:</label>
+    <input required type="text" name="title" class="form-control" ng-model="createListFormCtrl.list.name" placeholder="Name">
+  </div>
+  <button type="submit" class="btn btn-default">Add</button>
+</form>
