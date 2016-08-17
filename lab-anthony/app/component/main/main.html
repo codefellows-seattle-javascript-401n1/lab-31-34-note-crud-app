@@ -1,3 +1,6 @@
 <main class="app-main">
-  <h1> {{mainCtrl.example}} </h1>
+  <app-create-list-form></app-create-list-form>
+  <div class="app-list-container">
+    <app-list ng-repeat="item in mainCtrl.lists" list="item"></app-list>
+  </div>
 </main>

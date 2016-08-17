@@ -1,6 +1,7 @@
 {
   "rules": {
     "no-console": 0,
+    "no-unused-vars": [2, {"vars": "all", "args": "none"}],
     "indent": [
       2,
       2
@@ -30,7 +31,8 @@
     "beforeEach": false,
     "afterEach": false,
     "before": false,
-    "after": false
+    "after": false,
+    "__API_URL__": false
   },
   "ecmaFeatures": {
     "modules": true,
