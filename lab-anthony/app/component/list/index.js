@@ -21,7 +21,14 @@ noteApp.directive('appList', function(){
 noteApp.controller('ListController', ['$log', 'listService', ListController]);
 
 function ListController($log, listService){
-  this.hello = function(){
-    console.log('Hello world!');
+  this.deleteList = function(noteId){
+    $log.debug('listCtrl.deleteList');
+    listService.deleteList(noteId)
+    .then(() => {})
+    .catch((err) => {
+      $log.error(err);
+    });
   };
+
+
 }
