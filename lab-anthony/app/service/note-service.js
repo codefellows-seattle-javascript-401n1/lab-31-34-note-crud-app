@@ -16,7 +16,7 @@ function noteService($q, $log, $http){
   service.createNote = function(data){
     $log.debug('noteService.createNote');
     return $q((resolve, reject) => {
-      $http(baseUrl, data, requestConfig)
+      $http.post(baseUrl, data, requestConfig)
       .then((res) => {
         resolve(res.data);
       })

@@ -22,5 +22,6 @@ noteApp.directive('appNote', function(){
 noteApp.controller('NoteController', ['$log', 'listService', 'noteService', NoteController]);
 
 function NoteController($log, listService, noteService){
+  console.log('Hello world');
   ///// TODO: ALL ACTIONS /////
 }
