@@ -18,9 +18,9 @@ noteApp.directive('appList', function(){
   };
 });
 
-noteApp.controller('ListController', ['$log', 'listService', ListController]);
+noteApp.controller('ListController', ['$log', 'listService', 'noteService', ListController]);
 
-function ListController($log, listService){
+function ListController($log, listService, noteService){
   this.deleteList = function(noteId){
     $log.debug('listCtrl.deleteList');
     listService.deleteList(noteId)
@@ -30,5 +30,19 @@ function ListController($log, listService){
     });
   };
 
+  this.deleteNote = function(noteId){
+    $log.debug('listCtrl.deleteNote');
+    noteService.deleteNote(noteId)
+    .then((note) => {
+      this.list.notes.forEach((note, index) => {
+        if (note._id === noteId) {
+          this.list.notes.splice(index, 1);
+        }
+      });
+    })
+    .catch((err) => {
+      $log.error(err);
+    });
+  };
 
 }

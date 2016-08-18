@@ -13,8 +13,8 @@ noteApp.directive('appNote', function(){
     controllerAs: 'noteCtrl',
     bindToController: true,
     scope: {
-      note: '='
-      // deleteNote: '&'
+      note: '=',
+      deleteNote: '&'
     }
   };
 });

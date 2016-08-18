@@ -26,7 +26,18 @@ function noteService($q, $log, $http){
     });
   };
 
-  ///// TODO: deleteNote /////
+  service.deleteNote = function(noteId){
+    $log.debug('noteService.deleteNote');
+    return $q((resolve, reject) => {
+      $http.delete(`${baseUrl}/${noteId}`, requestConfig)
+      .then((res) => {
+        resolve(res.data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+    });
+  };
 
   return service;
 }
