@@ -3,7 +3,7 @@
 .app-list {
   position: relative;
   display: inline-block;
-  width: 250px;
+  width: 300px;
   margin: 10px;
   padding: 1px;
   background-color: #ffffee;
@@ -13,7 +13,7 @@
   h2 {
     color: $app-dark;
     padding-left: 5px;
-    margin: 10px 0px 30px 0px;
+    margin: 10px 0px 10px 0px;
     border-bottom: 3px solid $app-default;
   }
 
@@ -21,7 +21,13 @@
     li {
       color: $app-dark;
       list-style: none;
-      margin-top: 10px;
+      margin-top: 5px;
+      margin-right: 10px;
     }
+  }
+
+  .fa-trash-o {
+    margin-left: 10px;
+    font-size: 15px;
   }
 }

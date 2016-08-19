@@ -13,22 +13,38 @@ noteApp.directive('appList', function(){
     controllerAs: 'listCtrl',
     bindToController: true,
     scope: {
-      list: '='
+      list: '=',
+      deleteList: '&'
     }
   };
 });
 
-noteApp.controller('ListController', ['$log', 'listService', ListController]);
+noteApp.controller('ListController', ['$log', 'listService', 'noteService', ListController]);
 
-function ListController($log, listService){
-  this.deleteList = function(noteId){
+function ListController($log, listService, noteService){
+  this.deleteList = function(listId){
     $log.debug('listCtrl.deleteList');
-    listService.deleteList(noteId)
+
+    listService.deleteList(listId)
     .then(() => {})
     .catch((err) => {
       $log.error(err);
     });
   };
 
+  this.deleteNote = function(noteId){
+    $log.debug('listCtrl.deleteNote');
+    noteService.deleteNote(noteId)
+    .then((note) => {
+      this.list.notes.forEach((note, index) => {
+        if (note._id === noteId) {
+          this.list.notes.splice(index, 1);
+        }
+      });
+    })
+    .catch((err) => {
+      $log.error(err);
+    });
+  };
 
 }
