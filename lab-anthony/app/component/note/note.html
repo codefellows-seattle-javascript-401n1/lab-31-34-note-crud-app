@@ -1,8 +1,5 @@
 <li class="app-note">
   <h2>{{noteCtrl.note.name}}</h2>
   <p>{{noteCtrl.note.content}}</p>
-  <i class="fa fa-pencil"></i>
   <i class="fa fa-trash-o" ng-click="noteCtrl.deleteNote({noteId: noteCtrl.note._id})"></i>
-
-  <!-- <app-edit-note-modal></app-edit-note-modal> -->
 </li>

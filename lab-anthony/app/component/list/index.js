@@ -13,7 +13,8 @@ noteApp.directive('appList', function(){
     controllerAs: 'listCtrl',
     bindToController: true,
     scope: {
-      list: '='
+      list: '=',
+      deleteList: '&'
     }
   };
 });
@@ -21,9 +22,10 @@ noteApp.directive('appList', function(){
 noteApp.controller('ListController', ['$log', 'listService', 'noteService', ListController]);
 
 function ListController($log, listService, noteService){
-  this.deleteList = function(noteId){
+  this.deleteList = function(listId){
     $log.debug('listCtrl.deleteList');
-    listService.deleteList(noteId)
+
+    listService.deleteList(listId)
     .then(() => {})
     .catch((err) => {
       $log.error(err);

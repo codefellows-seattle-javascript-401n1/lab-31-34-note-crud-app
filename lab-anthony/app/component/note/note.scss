@@ -13,8 +13,8 @@
   h2 {
 
     display: inline-block;
+    width: 200px;
     margin-top: 4px;
-    margin-left: 22px;
     margin-right: 5px;
     font-size: 1.8em;
     padding-left: 0px;
@@ -27,27 +27,13 @@
 
 
   p {
-    display: inline;
     font-weight: bold;
     font-size: 1em;
   }
 
-  .fa-pencil {
-    position: absolute;
-    margin-top: 25px;
-    margin-right: 5px;
-  }
-
-  .fa-pencil:hover {
-    color: green;
-  }
-
-  .fa-pencil:active {
-    color: $app-light;
-  }
-
   .fa-trash-o {
-    position: absolute;
+    display: inline-block;
+    // position: absolute;
     margin-right: 5px;
     margin-top: 5px;
   }
@@ -77,12 +63,6 @@
 }
 
 .fa-trash-o:hover {
-  animation-name: pulse;
-  animation-duration: 0.4s;
-  animation-fill-mode: both;
-}
-
-.fa-pencil:hover {
   animation-name: pulse;
   animation-duration: 0.4s;
   animation-fill-mode: both;

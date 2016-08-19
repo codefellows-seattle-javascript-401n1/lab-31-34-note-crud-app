@@ -53,9 +53,9 @@ function listService($q, $log, $http){
     return $q((resolve, reject) => {
       $http.delete(`${baseUrl}/${listId}`)
       .then((res) => {
-        this.lists.forEach((list, index) => {
-          if (list.id === listId) {
-            this.lists.splice(index, 1);
+        service.lists.forEach((list, index) => {
+          if (list._id === listId) {
+            service.lists.splice(index, 1);
           }
         });
         resolve(res.data);
@@ -65,8 +65,6 @@ function listService($q, $log, $http){
       });
     });
   };
-
-  ///// TODO: UPDATE /////
 
   return service;
 
