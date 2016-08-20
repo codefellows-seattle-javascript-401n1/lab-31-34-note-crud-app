@@ -9,9 +9,9 @@ angular.module('listApp').factory('listService',['$log','$q', '$http', listServi
  * @return {service object}  an object that has the properties (values/functions) used to perform CRUD on lists.
  */
 function listService($log, $q, $http){
-  $log.debug('entered listService function');
+  $log.debug('entered listService()');
   /**
-   * anyone who accesses our service will be accessing the "service" object (by reference), which we return at the end of this factory function.  The "service" object will contain the properties that are defined in this function "service.somepropertyname".
+   * anyone who accesses our service will be accessing by reference the "service" object, which we return at the end of this factory function.  The "service" object will contain the properties that are defined in this function "service.somepropertyname".
    */
   let service = {};
   service.lists = [];
@@ -27,7 +27,7 @@ function listService($log, $q, $http){
   };
 
   service.createList = function(data){
-    $log.debug('entered listService.createList');
+    $log.debug('entered listService.createList()');
     return $q((resolve, reject) => {
       $http.post(`${__API_URL__}/api/list`, data, config)
       .then(res => {
@@ -42,7 +42,7 @@ function listService($log, $q, $http){
     });
   };
   service.fetchLists = function(){
-    $log.debug('entered listService.fetchLists');
+    $log.debug('entered listService.fetchLists()');
     return $q((resolve, reject) => {
       $http({
         method: 'GET',

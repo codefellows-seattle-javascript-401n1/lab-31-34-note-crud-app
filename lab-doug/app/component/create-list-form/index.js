@@ -21,8 +21,12 @@ function CreateListFormController($log, listService){
   this.createList = function(){
     $log.debug('entered createListFormCtrl.createList');
     listService.createList(this.list)
-    .then()
-    .catch();
+    .then(() => {
+      this.list = {};
+    })
+    .catch(() => {
+      this.list = {};
+    });
   };
 
 }
