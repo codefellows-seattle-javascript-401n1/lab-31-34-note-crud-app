@@ -30,7 +30,8 @@
     "afterEach": false,
     "before": false,
     "after": false,
-    "angular": false
+    "angular": false,
+    "__API_URL__": false
   },
   "ecmaFeatures": {
     "modules": true,

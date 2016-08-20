@@ -6,15 +6,19 @@ angular.module('listApp').factory('listService',['$log','$q', '$http', listServi
 /**
  * listService - factory/singleton function that returns service object
  *
- * @return {service object}  an object that has the built in functionality of creating lists.
+ * @return {service object}  an object that has the properties (values/functions) used to perform CRUD on lists.
  */
 function listService($log, $q, $http){
-  $log.debug('entered listService function');
+  $log.debug('entered listService()');
   /**
-   * anyone who accesses our service will be accessing this object, which we return at the end of this factory function
+   * anyone who accesses our service will be accessing by reference the "service" object, which we return at the end of this factory function.  The "service" object will contain the properties that are defined in this function "service.somepropertyname".
    */
   let service = {};
   service.lists = [];
+
+  /**
+   * private variable "config" in listService function that is not included in the "service" object that is returned by reference to those using the listService.
+   */
   let config = {
     headers: {
       'Content-Type': 'application/json',
@@ -23,7 +27,7 @@ function listService($log, $q, $http){
   };
 
   service.createList = function(data){
-    $log.debug('entered listService.createList');
+    $log.debug('entered listService.createList()');
     return $q((resolve, reject) => {
       $http.post(`${__API_URL__}/api/list`, data, config)
       .then(res => {
@@ -38,7 +42,7 @@ function listService($log, $q, $http){
     });
   };
   service.fetchLists = function(){
-    $log.debug('entered listService.fetchLists');
+    $log.debug('entered listService.fetchLists()');
     return $q((resolve, reject) => {
       $http({
         method: 'GET',
@@ -79,9 +83,9 @@ function listService($log, $q, $http){
   service.deleteList = function(data){
     $log.debug('listService.deleteList');
     return $q((resolve, reject) => {
-      $http.delete(`${__API_URL__}/api/list/${data.id}`, config)
+      $http.delete(`${__API_URL__}/api/list/${data._id}`, config)
       .then(res => {
-        $log.log('listService.deleteList suceeded');
+        $log.log('listService.deleteList sucCeeded');
         resolve(res.data)
       .catch(err => {
         $log.error('listService.deleteList failed');
