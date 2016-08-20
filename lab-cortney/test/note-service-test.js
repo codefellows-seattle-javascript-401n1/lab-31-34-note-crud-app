@@ -22,8 +22,8 @@ describe('testing noteService', function() {
     this.$httpBackend.verifyNoOutstandingRequest();
   });
 
-  it('createNote should return a note', () => {
-    // stuff and things
-  })
+  // it('createNote should return a note', () => {
+  //   // stuff and things
+  // })
 
 }); // end noteService testing module
