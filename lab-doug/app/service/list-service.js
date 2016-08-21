@@ -1,7 +1,7 @@
 'use strict';
 const angular = require('angular');
 
-angular.module('listApp').factory('listService',['$log','$q', '$http', listService] );
+angular.module('widgetApp').factory('listService',['$log','$q', '$http', listService] );
 
 /**
  * listService - factory/singleton function that returns service object
@@ -65,7 +65,7 @@ function listService($log, $q, $http){
     return $q((resolve, reject) => {
       $http.put(`${__API_URL__}/api/list/${data._id}`, data, config)
       .then(res => {
-        $log.log('listService.updateList succeeded');
+        $log.log('listService.updateList() succeeded');
         this.list.forEach((list, index) => {
           if(list._id === res.data._id){
             this.lists[index] = res.data;
@@ -74,21 +74,27 @@ function listService($log, $q, $http){
         resolve(res.data);
       })
       .catch(err => {
-        $log.error('listService.updateList failed');
+        $log.error('listService.updateList() failed');
         reject(err);
       });
     });
   };
 
-  service.deleteList = function(data){
-    $log.debug('listService.deleteList');
+  service.deleteList = function(listId){
+    $log.debug('listService.deleteList()');
     return $q((resolve, reject) => {
-      $http.delete(`${__API_URL__}/api/list/${data._id}`, config)
+      $http.delete(`${__API_URL__}/api/list/${listId}`, config)
       .then(res => {
-        $log.log('listService.deleteList sucCeeded');
+        console.log('res.data in deleteList: ', res.data);
+        this.lists.forEach((list, index) => {
+          if(list._id === listId){
+            this.lists.splice(index, 1);
+          }
+        });
+        $log.log('listService.deleteList() succeeded');
         resolve(res.data)
       .catch(err => {
-        $log.error('listService.deleteList failed');
+        $log.error('listService.deleteList() failed');
         reject(err);
       });
       });
