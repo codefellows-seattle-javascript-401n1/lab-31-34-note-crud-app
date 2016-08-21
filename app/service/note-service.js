@@ -7,14 +7,14 @@ angular.module('demoApp').factory('noteService', ['$log', '$q','$http', noteServ
 function noteService($log, $q, $http){
   // create service
   let service = {};
-  // set private constants 
+  // set private constants
   let url = `${__API_URL__}/api/note`;
   let config = {
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      'Accept': 'application/json'
     }
-  }
+  };
   // add properties to service
   // add methods to service
   service.createNote = function(data){
@@ -31,7 +31,7 @@ function noteService($log, $q, $http){
         reject(err);
       });
     });
-  }
+  };
 
   service.deleteNote = function(noteId){
     $log.debug('noteService.deleteNote');
@@ -48,7 +48,7 @@ function noteService($log, $q, $http){
       });
     });
   };
-  
+
   // return service
   return service;
 }

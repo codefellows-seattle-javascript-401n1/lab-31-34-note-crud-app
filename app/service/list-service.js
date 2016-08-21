@@ -6,7 +6,7 @@ angular.module('demoApp').factory('listService', ['$log', '$q', '$http', listSer
 
 function listService($log, $q, $http){
   let service = {};
-  let url = `${__API_URL__}/api/list`;
+  let url = `${__API_URL__}/api/note`;
   let config = {
     headers: {
       'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ function listService($log, $q, $http){
     $log.debug('listService.updateList');
     return $q((resolve, reject) => {
       $http.put(`${url}/${data._id}`, data, config)
-        .then( lists => {
+        .then( res => {
           $log.log(`GET ${url}:${res.status} success!`);
           this.lists.forEach((list, index) => {
             if (list._id === res.data._id) this.lists[index] = res.data;

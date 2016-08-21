@@ -2,12 +2,15 @@
 
 require('./list.scss');
 const angular = require('angular');
-angular.module('demoApp').directive('appList', function(){
+angular.module('demoApp')
+.controller('ListController', ['$q', '$log', 'listService', 'noteService', ListController
+])
+.directive('appList', function(){
   return {
     restrict: 'E',
     replace: true,
     template: require('./list.html'),
-    controller: ['$log', 'listService', 'noteService', ListController],
+    controller: 'ListController',
     controllerAs: 'listCtrl',
     bindToController: true,
     scope: {
@@ -16,12 +19,12 @@ angular.module('demoApp').directive('appList', function(){
   };
 });
 
-function ListController($log, listService, noteService){
+function ListController($q, $log, listService, noteService){
   this.deleteList = function(){
     $log.debug('listCtrl.deleteList');
     listService.deleteList(this.list._id)
     .catch(() => {
-      alert('you failed to deleteme yanoob');
+      alert('deletion sucks');
     });
   };
 
@@ -29,25 +32,30 @@ function ListController($log, listService, noteService){
     $log.debug('listCtrl.createNote');
     data.listId = this.list._id;
 
-    noteService.createNote(data)
+    return noteService.createNote(data)
     .then( note => {
       this.list.notes.push(note);
+      return note;
     })
     .catch( () => {
-      alert('dat soe daint werk awt awl');
+      alert('NoNo');
     });
   };
 
   this.deleteNote = function(noteId){
     $log.debug('listCtrl.deleteNote');
-    noteService.deleteNote(noteId)
-    .then( () => {
-      this.list.notes.forEach( (note, index) => {
-        if (note._id === noteId) this.list.notes.splice(index, 1);
+    return $q((resolve, reject) => {
+      return noteService.deleteNote(noteId)
+      .then( (note) => {
+        this.list.notes.forEach( (note, index) => {
+          if (note._id === noteId) this.list.notes.splice(index, 1);
+        });
+        resolve(note);
+      })
+      .catch(() => {
+        reject('rejected this stuff');
+        alert('NADA');
       });
-    })
-    .catch(() => {
-      alert('DERRRRRNN');
     });
   };
 
