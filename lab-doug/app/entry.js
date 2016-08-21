@@ -18,3 +18,4 @@ require('./component/main');
 require('./component/create-list-form');
 require('./component/list');
 require('./component/create-note-form');
+require('./component/note-item');
