@@ -84,19 +84,17 @@ function listService($log, $q, $http){
     $log.debug('listService.deleteList()');
     return $q((resolve, reject) => {
       $http.delete(`${__API_URL__}/api/list/${listId}`, config)
-      .then(res => {
+      .then((res) => {
         console.log('res.data in deleteList: ', res.data);
         this.lists.forEach((list, index) => {
-          if(list._id === listId){
-            this.lists.splice(index, 1);
-          }
+          if(list._id === listId) this.lists.splice(index, 1);
         });
         $log.log('listService.deleteList() succeeded');
-        resolve(res.data)
-      .catch(err => {
+        resolve(res.data);
+      })
+      .catch((err) => {
         $log.error('listService.deleteList() failed');
         reject(err);
-      });
       });
     });
   };
