@@ -24,12 +24,14 @@
     "browser": true
   },
   "globals": {
+    "__API_URL__": false,
     "describe": false,
     "it": false,
     "beforeEach": false,
     "afterEach": false,
     "before": false,
-    "after": false
+    "after": false,
+    "expect": false
   },
   "ecmaFeatures": {
     "modules": true,

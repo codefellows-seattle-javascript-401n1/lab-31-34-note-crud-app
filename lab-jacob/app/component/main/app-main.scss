@@ -1,0 +1,32 @@
+@import "_theme";
+
+.app-main {
+  background-color: white;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-bottom: thin solid $app-default;
+
+  h1 {
+    color: $app-hText;
+    text-shadow: black;
+  }
+}
+
+.listControl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lists {
+  margin: 3% 3% 3% 3%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}

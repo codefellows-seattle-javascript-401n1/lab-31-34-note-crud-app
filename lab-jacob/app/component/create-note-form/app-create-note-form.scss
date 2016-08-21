@@ -1,0 +1,12 @@
+@import "_theme";
+
+.appCreateNoteForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: baseline;
+
+  button {
+    margin: 0 auto;
+  }
+}
