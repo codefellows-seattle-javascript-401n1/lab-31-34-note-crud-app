@@ -36,6 +36,13 @@ describe('testing noteService', function(){
     this.$httpBackend.flush();
   });
   it('deleteNote should delete a note', () => {
-    this.$httpBackend.expectDELETE()
-  })
+    this.$httpBackend.expectDELETE(`${baseUrl}/1234567890`, {'Accept': 'application/json'})
+    .respond(200, {_id: '1234567890', name: 'Smellon', content: 'Splicky note', listId: '54321', _v: 0});
+    this.noteService.deleteNote('1234567890')
+    .then(note => {
+      expect(note._id).toBe('1234567890');
+      expect(note.name).toBe('Smellon');
+    });
+    this.$httpBackend.flush();
+  });
 });

@@ -47,16 +47,20 @@ function ListController($q, $log, listService, noteService){
     });
   };
 
-  this.deleteNote = function(noteId){
+  this.deleteNote = function(noteId) {
     $log.debug('listCtrl.deleteNote');
-    noteService.deleteNote(noteId)
-    .then( () => {
-      this.list.notes.forEach((note, index) => {
-        if(note._id === noteId) this.list.notes.splice(index, 1);
+    return $q((resolve, reject) => {
+      noteService.deleteNote(noteId)
+      .then(() => {
+        this.list.notes.forEach((note, idx) => {
+          if (note._id === noteId) this.list.notes.splice(idx, 1);
+        });
+        resolve();
+      })
+      .catch(() => {
+        alert('could not delete');
+        reject();
       });
-    })
-    .catch(() => {
-      ('Bip, Boop, I did not work');
     });
   };
 }
