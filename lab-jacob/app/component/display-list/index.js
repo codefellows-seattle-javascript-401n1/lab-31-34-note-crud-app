@@ -31,36 +31,40 @@ function DisplayListController($q, $log, listService, noteService){
 
   this.createNote = function(data){
     $log.debug('createNote function in displayListController');
-    return $q((resolve, reject) => {
-      data.listId = this.list._id;
-      noteService.createNote(data)
+    // return $q((resolve, reject) => {
+    data.listId = this.list._id;
+    return noteService.createNote(data)
       .then(note => {
         this.list.notes.push(note);
-        resolve(note);
-      }).catch(err => {
+        // resolve(note);
+        return note;
+      })
+      .catch(err => {
         $log.error(err);
         alert('somethings wrong in createNote');
-        reject(err);
+        // reject(err);
+        return err;
       });
-    });
+    // });
   };
 
   this.deleteNote = function(noteObject){
     $log.debug('deleteNote function in displayListController');
     return $q((resolve, reject) => {
       noteService.deleteNote(noteObject)
-      .then(() => {
-        this.list.notes.forEach( (note, index) => {
-          if(note._id === noteObject._Id) {
-            this.list.notes.splice(index, 1);
-            resolve(noteObject);
-          }
+        .then(() => {
+          this.list.notes.forEach( (note, index) => {
+            if(note._id === noteObject._id) {
+              this.list.notes.splice(index, 1);
+              resolve(noteObject);
+            }
+          });
+        })
+        .catch((err) => {
+          $log.error(err);
+          alert('something wrong in deleteNote displaylistCtrl');
+          reject(err);
         });
-      }).catch((err) => {
-        $log.error(err);
-        alert('something wrong in deleteNote displaylistCtrl');
-        reject(err);
-      });
     });
   };
 }

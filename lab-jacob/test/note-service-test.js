@@ -40,10 +40,8 @@ describe('testing the note service', function(){
   });
 
   it('should delete a note with noteService', () => {
-    // this.$httpBackend.expectPOST(baseUrl, {name: 'a note', content: 'notes'}, headers).respond(200, {_id: '10203040', name: 'a note', content: 'notes', _v: 0});
     this.$httpBackend.expectDELETE(`${baseUrl}/10203040`, {'Accept': 'application/json'}).respond(204, { status: 'OK' });
 
-    // this.noteService.createNote({name: 'a note', content: 'notes'});
     this.noteService.deleteNote({_id: '10203040'})
     .then(note => {
       expect(note.name).toBe(undefined);
