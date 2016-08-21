@@ -5,7 +5,7 @@ const angular = require('angular');
 angular.module('galleryApp').directive('appNoteLi', function(){
   return {
     restrict: 'E',
-    replace: true,
+    // replace: true,
     template: require('./note-li.html'),
     controller: ['$log', 'noteService', NoteLiController],
     controllerAs: 'noteLiCtrl',
@@ -19,5 +19,4 @@ angular.module('galleryApp').directive('appNoteLi', function(){
 
 function NoteLiController(){
 //edit note goes here!
-
 }

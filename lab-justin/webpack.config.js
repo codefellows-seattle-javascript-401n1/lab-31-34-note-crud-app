@@ -19,7 +19,7 @@ if(production){
   plugins = plugins.concat([
     new webpack.optimize.UglifyJsPlugin({//minify and uglify codes
       mangle: true,
-      cmpress: {
+      compress: {
         warnings: false
       }
     }),

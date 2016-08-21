@@ -1,9 +1,11 @@
 @import "_theme";
 
 .app-create-list-form {
+  // position: relative;
   // align-items: center;
+
   label{
-    font-size: 25px;
-    color: $app-light;
+    font-size: 30px;
+    color: pink;
   }
 }

@@ -6,12 +6,7 @@ angular.module('galleryApp').factory('listService', ['$log', '$q', '$http', list
 function listService($log, $q, $http){
   let service = {};
   let url = `${__API_URL__}/api/list`;
-  // let config = {
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'Accept': 'application/json'
-  //   }
-  // };
+
   service.lists = [];  // add functionality to the service
   service.createList = function(data){
     $log.debug('listService.createList');
@@ -45,10 +40,10 @@ function listService($log, $q, $http){
   };
   service.updateList = function(data){
     $log.debug('listService.updateList');
-    let res;
+
     return $q((resolve, reject) => {
       $http.put(`${url}/${data._id}`, data)
-        .then( lists => {
+        .then( res => {
           $log.log(`PUT ${url}:${res.status} listService.updateList: PUT-success!`);
           this.lists.forEach((list, index) => {
             if (list._id === res.data._id) return this.lists[index] = res.data;
@@ -63,7 +58,7 @@ function listService($log, $q, $http){
   };
   service.deleteList = function(listId){
     $log.debug('listService.deleteList');
-    let res;
+    // let res;
     return $q((resolve, reject) => {
       $http.delete(`${url}/${listId}`)
       .then((res) =>{
@@ -74,7 +69,7 @@ function listService($log, $q, $http){
         resolve(res.data);
       })
       .catch((err) => {
-        $log.log(`DELETE ${url}:${res.status} listService.deleteList: DELETE-failure!`);
+        $log.log(`DELETE ${url}:${err.status} listService.deleteList: DELETE-failure!`);
         reject(err);
       });
     });

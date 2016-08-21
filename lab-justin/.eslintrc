@@ -24,6 +24,9 @@
     "browser": true
   },
   "globals": {
+    "lists": false,
+    "list": false,
+    "baseUrl": false,
     "__API_URL__": false,
     "describe": false,
     "it": false,

@@ -6,7 +6,7 @@ const angular = require('angular');
 angular.module('galleryApp').directive('appCreateListForm', function(){
   return {
     restrict: 'E',
-    replace: true,
+    // replace: true,
     template: require('./create-list-form.html'),
     controller: ['$log', 'listService', CreateListFormController],
     controllerAs: 'createListFormCtrl',

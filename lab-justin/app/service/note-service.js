@@ -31,7 +31,7 @@ function noteService($log, $q, $http){
   };
   service.deleteNote = function(noteId){
     $log.debug('noteService.deleteNote');
-    $log.log('noteId', noteId.noteId);
+    $log.log('noteId', noteId);
     return $q((resolve,reject) => {
       $http.delete(`${url}/${noteId}`, config)
       .then( res => {
