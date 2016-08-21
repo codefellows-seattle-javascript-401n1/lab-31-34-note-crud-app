@@ -1,0 +1,11 @@
+@import "_theme.scss";
+
+.app-list {
+  li {    
+    color: $app-focus;
+  }
+
+  h2 {
+    color: $app-dark;
+  }
+}
