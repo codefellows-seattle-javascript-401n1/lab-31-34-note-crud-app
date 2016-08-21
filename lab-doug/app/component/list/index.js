@@ -40,4 +40,19 @@ function ListController($log, listService, noteService){
       $log.error('createNote() in list/index.js failed', err);
     });
   };
+
+  this.deleteNote = function(noteId){
+    $log.debug('entered deleteNote() in listController() in list/index.js');
+    noteService.deleteNote(noteId)
+    .then(() => {
+      $log.log('deleteNote() in list/index.js succeeded');
+      this.list.notes.forEach((note, index) => {
+        if(note._id === noteId) this.list.notes.splice(index, 1)
+      });
+    })
+    .catch((err) => {
+      $log.error('deleteNote() in list/index.js failed', err);
+    });
+  };
+
 }

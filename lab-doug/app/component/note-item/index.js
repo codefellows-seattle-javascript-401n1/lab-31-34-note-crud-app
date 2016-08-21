@@ -13,11 +13,12 @@ widgetApp.directive('appNoteItem', function(){
     controllerAs: 'noteItemCtrl',
     bindToController: true,
     scope: {
-      note: '='
+      note: '=',
+      deleteNote: '&'
     }
   };
 });
 
 function NoteItemController(){
-  
+
 }
