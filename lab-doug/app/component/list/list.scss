@@ -6,9 +6,10 @@
   border: black solid 3px;
   width: 100%;
   background-color: $app-light;
+
 }
 
-.fa-minus-circle {
+.fa-minus-circle  {
   color: red;
   font-size: 2em;
   }
@@ -19,3 +20,16 @@
 .fa-minus-circle:active {
     color: blue;
   }
+
+.fa-pencil-square {
+  color: red;
+  font-size: 2em;
+  }
+
+.fa-pencil-square:hover {
+      color: green;
+    }
+
+.fa-pencil-square:active {
+      color: blue;
+    }
