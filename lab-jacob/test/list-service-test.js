@@ -40,8 +40,38 @@ describe('testing the list service', function(){
     this.$httpBackend.expectGET(baseUrl, {'Accept': 'application/json'}).respond(200, this.listService.lists);
 
     this.listService.fetchLists()
-    .then(lists => {
-      expect(lists).toBe(this.listService.lists);
+    .then(list => {
+      expect(list).toBe(this.listService.lists);
+    })
+    .catch(err => {
+      expect(err).toBe(undefined);
+    });
+
+    this.$httpBackend.flush();
+  });
+
+  it('should update the list', () => {
+    this.$httpBackend.expectPUT(`${baseUrl}/123456789`, {name: 'new list name', _id: '123456789'}, headers).respond(200, {_id: '123456789',name: 'new list name', notes: []});
+
+    this.listService.updateList({name: 'new list name', _id: '123456789'})
+    .then(list => {
+      expect(list.name).toBe('new list name');
+      expect(list._id).toBe('123456789');
+    })
+    .catch(err => {
+      expect(err).toBe(undefined);
+    });
+
+    this.$httpBackend.flush();
+  });
+
+  it('should delete a list', () => {
+    this.$httpBackend.expectDELETE(`${baseUrl}/123456789`, {'Accept': 'application/json'}).respond(204, {});
+
+    this.listService.deleteList('123456789')
+    .then(list => {
+      expect(list.name).toBe(undefined);
+      expect(list.notes).toBe(undefined);
     })
     .catch(err => {
       expect(err).toBe(undefined);

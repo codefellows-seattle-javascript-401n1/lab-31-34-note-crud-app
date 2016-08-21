@@ -31,21 +31,19 @@ function DisplayListController($q, $log, listService, noteService){
 
   this.createNote = function(data){
     $log.debug('createNote function in displayListController');
-    // return $q((resolve, reject) => {
-    data.listId = this.list._id;
-    return noteService.createNote(data)
+    return $q((resolve, reject) => {
+      data.listId = this.list._id;
+      noteService.createNote(data)
       .then(note => {
         this.list.notes.push(note);
-        // resolve(note);
-        return note;
+        resolve(note);
       })
       .catch(err => {
         $log.error(err);
         alert('somethings wrong in createNote');
-        // reject(err);
-        return err;
+        reject(err);
       });
-    // });
+    });
   };
 
   this.deleteNote = function(noteObject){
