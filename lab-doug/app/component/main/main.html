@@ -1,6 +1,5 @@
 <main class="app-main">
   <create-list-form></create-list-form>
-  <!--<h1> {{mainCtrl.lists}} </h1>-->
   <!-- the "list" attribute below is refering to the "list" property in the appList  directive isolate scope passed by reference "=" in the list/index.js file-->
   <app-list ng-repeat="item in mainCtrl.lists" list="item"></app-list>
 </main>
