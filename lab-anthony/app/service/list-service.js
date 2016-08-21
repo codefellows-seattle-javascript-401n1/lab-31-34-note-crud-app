@@ -32,7 +32,7 @@ function listService($q, $log, $http){
   };
 
   service.createList = function(data){
-    $log.debug('listService.createList');
+    $log.debug('listService.createList', data);
     if (!data || !data.name) {
       return $q.reject(new Error('The list requires a name'));
     }
@@ -40,7 +40,7 @@ function listService($q, $log, $http){
       $http.post(baseUrl, data, requestConfig)
       .then((res) => {
         this.lists.push(res.data);
-        resolve(res.body);
+        resolve(res.data);
       })
       .catch((err) => {
         reject(err);
