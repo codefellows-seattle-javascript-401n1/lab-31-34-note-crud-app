@@ -30,10 +30,10 @@ function noteService($log, $q, $http){
     });
   };
 
-  service.deleteNote = function(noteId){
+  service.deleteNote = function(noteObject){
     $log.debug('deleteNote in noteService');
     return $q((resolve, reject) => {
-      $http.delete(`${url}/${noteId}`, config)
+      $http.delete(`${url}/${noteObject._id}`, config)
       .then(res => {
         $log.log(`DELETE ${res.url}:${res.status} success!!`);
         resolve(res.data);

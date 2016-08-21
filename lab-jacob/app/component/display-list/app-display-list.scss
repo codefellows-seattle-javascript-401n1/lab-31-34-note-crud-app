@@ -9,4 +9,8 @@
   h2 {
     border-bottom: thin solid $app-noteBorder;
   }
+
+  .notes {
+    list-style: none;
+  }
 }

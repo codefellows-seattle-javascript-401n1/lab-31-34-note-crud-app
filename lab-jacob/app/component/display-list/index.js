@@ -45,18 +45,22 @@ function DisplayListController($q, $log, listService, noteService){
     });
   };
 
-  this.deleteNote = function(noteId){
+  this.deleteNote = function(noteObject){
     $log.debug('deleteNote function in displayListController');
-    noteService.deleteNote(noteId)
-    .then(() => {
-      this.list.notes.forEach( (note, index) => {
-        if(note._id === noteId) {
-          this.list.notes.splice(index, 1);
-        }
+    return $q((resolve, reject) => {
+      noteService.deleteNote(noteObject)
+      .then(() => {
+        this.list.notes.forEach( (note, index) => {
+          if(note._id === noteObject._Id) {
+            this.list.notes.splice(index, 1);
+            resolve(noteObject);
+          }
+        });
+      }).catch((err) => {
+        $log.error(err);
+        alert('something wrong in deleteNote displaylistCtrl');
+        reject(err);
       });
-    }).catch((err) => {
-      $log.error(err);
-      alert('something wrong in deleteNote');
     });
   };
 }
