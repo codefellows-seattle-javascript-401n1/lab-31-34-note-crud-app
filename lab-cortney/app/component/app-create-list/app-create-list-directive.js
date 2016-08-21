@@ -2,7 +2,8 @@
 
 const angular = require('angular');
 
-angular.module('noteApp').directive('appCreateList', function() {
+angular.module('noteApp').controller('AppCreateListController', ['$log', 'listService', AppCreateListController])
+.directive('appCreateList', function() {
   return {
     restrict: 'E',
     replace: true,
@@ -19,9 +20,9 @@ function AppCreateListController($log, listService) {
 
   this.createList = function() {
     $log.debug('appCreateListCtrl.createList');
-    listService.createList(this.list)
+    return listService.createList(this.list)
     .then(() => {
-      this.list = {};
+      this.list = {}; // clears create-list form after posting list to page
     })
     .catch(() => {
       $log.error('createListForm didn\'t happen');

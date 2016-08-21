@@ -1,6 +1,6 @@
 'use strict';
 
-var baseUrl = 'http://localhost:3000/api/list';
+var baseUrlList = 'http://localhost:3000/api/list';
 
 var headers = {
   'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ describe('testing listService', function() {
   });
 
   it('createList should return a list', () => {
-    this.$httpBackend.expectPOST(baseUrl, {name: 'example list'}, headers)
+    this.$httpBackend.expectPOST(baseUrlList, {name: 'example list'}, headers)
     .respond(200, {status: 'success', _id: '57538738758375893', name: 'example list', notes: [], _v: 0});
 
     this.listService.createList({name: 'example list'})
@@ -49,7 +49,7 @@ describe('testing listService', function() {
       });
     });
 
-    this.$httpBackend.expectGET(baseUrl, {'Accept': 'application/json'})
+    this.$httpBackend.expectGET(baseUrlList, {'Accept': 'application/json'})
     .respond(200, {status: 'success', _id: '12345678', name: 'example list 2', notes: [], _v: 0});
 
     this.listService.fetchLists()
@@ -75,7 +75,7 @@ describe('testing listService', function() {
       });
     });
 
-    this.$httpBackend.expectPUT(`${baseUrl}/12345678`, {_id: '12345678', name: 'updated example list 3'}, headers)
+    this.$httpBackend.expectPUT(`${baseUrlList}/12345678`, {_id: '12345678', name: 'updated example list 3'}, headers)
     .respond(200, {status: 'success', _id: '12345678', name: 'updated example list 3', notes: [], _v: 0});
 
     this.listService.updateList({_id: '12345678',name: 'updated example list 3'})
@@ -101,7 +101,7 @@ describe('testing listService', function() {
       });
     });
 
-    this.$httpBackend.expectDELETE(`${baseUrl}/2345`)
+    this.$httpBackend.expectDELETE(`${baseUrlList}/2345`)
     .respond({status: 'success'});
 
     this.listService.deleteList(2345)
