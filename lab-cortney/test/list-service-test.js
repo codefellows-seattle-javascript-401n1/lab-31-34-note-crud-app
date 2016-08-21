@@ -1,8 +1,8 @@
 'use strict';
 
-let baseUrl = 'http://localhost:3000/api/list';
+var baseUrl = 'http://localhost:3000/api/list';
 
-let headers = {
+var headers = {
   'Content-Type': 'application/json',
   'Accept': 'application/json'
 };
@@ -23,16 +23,16 @@ describe('testing listService', function() {
 
   it('createList should return a list', () => {
     this.$httpBackend.expectPOST(baseUrl, {name: 'example list'}, headers)
-    .respond(200, {_id: '57538738758375893', name: 'example list', notes: [], _v: 0});
+    .respond(200, {status: 'success', _id: '57538738758375893', name: 'example list', notes: [], _v: 0});
 
-    this.listService.createList(baseUrl, {name: 'example list'}, headers)
+    this.listService.createList({name: 'example list'})
     .then((list) => {
       expect(list._id).toBe('57538738758375893');
       expect(list.name).toBe('example list');
       expect(Array.isArray(list.notes)).toBe(true);
     })
     .catch((err) => {
-      expect(err).toBe(undefined);
+      expect(err).toBe(null);
     });
 
     this.$httpBackend.flush();
