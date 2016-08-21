@@ -34,13 +34,12 @@ describe('testing listService', function() {
     .catch((err) => {
       expect(err).toBe(null);
     });
-
     this.$httpBackend.flush();
   });
 
   it('fetchLists should fetch a list', () => {
 
-    beforeEach( () => { // create list to fetch and update
+    beforeEach( () => { // create list to fetch
       this.listService.createList({name: 'example list 2'})
       .then( (list) => {
         resolve(list);
@@ -61,12 +60,12 @@ describe('testing listService', function() {
     .catch( (err) => {
       expect(err).toBe(null);
     });
-
     this.$httpBackend.flush();
   });
 
   it('updateList should update a list', () => {
-    beforeEach( () => { // create list to fetch and update
+
+    beforeEach( () => { // create list to update
       this.listService.createList({name: 'example list 3'})
       .then( (list) => {
         resolve(list);
@@ -76,10 +75,10 @@ describe('testing listService', function() {
       });
     });
 
-    this.$httpBackend.expectPUT(`${baseUrl}/12345678`, {name: 'updated example list 3'}, headers)
+    this.$httpBackend.expectPUT(`${baseUrl}/12345678`, {_id: '12345678', name: 'updated example list 3'}, headers)
     .respond(200, {status: 'success', _id: '12345678', name: 'updated example list 3', notes: [], _v: 0});
 
-    this.listService.updateList(`${baseUrl}/12345678`, {name: 'updated example list 3'}, headers)
+    this.listService.updateList({_id: '12345678',name: 'updated example list 3'})
     .then( (list) => {
       expect(list._id).toBe('12345678');
       expect(list.name).toBe('updated example list 3');
@@ -87,6 +86,32 @@ describe('testing listService', function() {
     .catch( (err) => {
       expect(err).toBe(null);
     });
+    this.$httpBackend.flush();
+  });
+
+  it('deleteList should delete a list', () => {
+
+    beforeEach( () => { // create list to baleet
+      this.listService.createList({name: 'example list 4'})
+      .then( (list) => {
+        resolve(list);
+      })
+      .catch( (err) => {
+        reject(err);
+      });
+    });
+
+    this.$httpBackend.expectDELETE(`${baseUrl}/2345`)
+    .respond({status: 'success'});
+
+    this.listService.deleteList(2345)
+    .then( (res) => {
+      expect(res.status).toBe('success');
+    })
+    .catch( (err) => {
+      expect(err).toBe(null);
+    });
+    this.$httpBackend.flush();
   });
 
 }); // end listService test module
