@@ -3,7 +3,7 @@ require('./main.scss');
 
 const angular = require('angular');
 
-angular.module('listApp').directive('appMain', function(){
+angular.module('widgetApp').directive('appMain', function(){
   return {
     restrict: 'E',
     replace: true,
@@ -19,8 +19,8 @@ angular.module('listApp').directive('appMain', function(){
 /**
  * MainController - populates the main.html template
  *
- * @param  {object} "listService" provides ability to perfrom CRUD on lists in the backend db as well as updating listService "list" array. The "listService" object is passed by reference as this parameter.
- * @return {promise} creates the "lists" property on the MainController which references the "lists" array in listService object. If the promise "resolve" sucessfully, then a populated "lists" array is returned.   The main html template uses angular data binding to this MainController.lists property, to populate current lists on the page.
+ * @param  {object} "listService" provides ability to perform CRUD on lists in the backend db as well as updating listService "list" array. The "listService" object is passed by reference as this parameter.
+ * @return {lists} creates the "lists" property on the MainController which references the "lists" array in listService object. If the promise "resolve" sucessfully, then a populated "lists" array is returned.   The main.html template uses angular data binding to this MainController.lists property, to populate current lists on the page.
  */
 function MainController(listService){
 
@@ -31,7 +31,7 @@ function MainController(listService){
   .then((lists) => {
 
     /**
-     * assign the "lists" property to the MainController and populate it.  When it is populated, the mian.html template is updated via angular data binding
+     * assign the "lists" property to the MainController and populate it.  When it is populated, the main.html template is updated via angular directives.  Currently <app-list ng-repeat> directive iterates over the lists array and populates individual lists on the page
      */
     this.lists = lists;
   })

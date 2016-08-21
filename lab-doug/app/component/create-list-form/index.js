@@ -2,7 +2,7 @@
 require('./create-list-form.scss');
 const angular = require('angular');
 
-angular.module('listApp').directive('createListForm', function(){
+angular.module('widgetApp').directive('createListForm', function(){
   return {
     restrict: 'E',
     replace: true,

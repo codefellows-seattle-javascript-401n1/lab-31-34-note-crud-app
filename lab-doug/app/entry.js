@@ -8,10 +8,11 @@ require('./scss/base.scss');
 const angular = require('angular');
 
 // angular modules
-angular.module('listApp', []);
+angular.module('widgetApp', []);
 
 // angular services
 require('./service/list-service');
 // angular components
 require('./component/main');
 require('./component/create-list-form');
+require('./component/list');
