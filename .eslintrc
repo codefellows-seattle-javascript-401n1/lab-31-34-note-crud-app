@@ -29,7 +29,11 @@
     "beforeEach": false,
     "afterEach": false,
     "before": false,
-    "after": false
+    "after": false,
+    "expect": false,
+    "angular": false,
+    "note": false,
+    "Angular": false
   },
   "ecmaFeatures": {
     "modules": true,
