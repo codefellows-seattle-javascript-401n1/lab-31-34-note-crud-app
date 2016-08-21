@@ -52,9 +52,9 @@ function listService($log, $q, $http){
   service.updateList = function(data){
     $log.debug('listS.update');
     return $q((resolve, reject) => {
-      $http.put(`${url}/${data._id}, data, config`)
-        .then( lists => {
-          $log.log(`PUT success ${url}:${err.status} `);
+      $http.put(`${url}/${data._id}`, data, config)
+        .then( res => {
+          $log.log(`PUT success ${url}:${res.status}`);
           this.lists.forEach((list, index) => {
             if (list._id === res.data._id) this.list[index] = res.data;
           });
@@ -72,7 +72,7 @@ function listService($log, $q, $http){
     return $q((resolve, reject) => {
       $http.delete(`${url}/${listId}`, config)
       .then( res => {
-        $log.log(`DELETE success ${res.url}::${res.status}`);
+        $log.log(`DELETE success ${res.url}:${res.status}`);
         this.lists.forEach((list, index) => {
           if (list._id === listId) this.lists.splice(index, 1);
         });

@@ -30,6 +30,13 @@
     "webpack-dev-server": "^1.14.1"
   },
   "devDependencies": {
-    "eslint": "^3.3.0"
+    "angular-mocks": "^1.5.8",
+    "eslint": "^3.3.0",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.2.0",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.0.2",
+    "karma-webpack": "^1.8.0"
   }
 }
