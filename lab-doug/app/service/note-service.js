@@ -2,7 +2,7 @@
 
 const angular = require('angular');
 const widgetApp = angular.module('widgetApp');
-widgetApp.factory(['$log', '$q', '$http', noteService]);
+widgetApp.factory('noteService', ['$log', '$q', '$http', noteService]);
 
 function noteService($log, $q, $http){
   let service = {};
@@ -10,7 +10,7 @@ function noteService($log, $q, $http){
   let config = {
     headers: {
       'Content-Type': 'application/json',
-      Accpet: 'application/json'
+      'Accept': 'application/json'
     }
   };
   service.createNote = function(data) {
