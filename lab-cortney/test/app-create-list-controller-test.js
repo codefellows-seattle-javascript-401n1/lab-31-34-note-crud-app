@@ -25,7 +25,6 @@ describe('testing AppCreateListController', function() {
 
     beforeEach( () => {
       this.$httpBackend.expectPOST(`${baseUrl}/list`, {name: 'example', notes: []}, headers)
-      // .respond(200, {name: 'example', _id: '4321', notes: [], _v: 0});
       .respond(200, {});
     });
 
