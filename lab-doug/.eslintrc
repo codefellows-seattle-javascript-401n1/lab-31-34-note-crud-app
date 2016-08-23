@@ -31,7 +31,9 @@
     "before": false,
     "after": false,
     "angular": false,
-    "__API_URL__": false
+    "__API_URL__": false,
+    "jasmine": false,
+    "expect": false 
   },
   "ecmaFeatures": {
     "modules": true,

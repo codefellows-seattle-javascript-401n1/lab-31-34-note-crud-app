@@ -33,7 +33,7 @@ function listService($log, $q, $http){
       .then(res => {
         $log.log('listService.createList succeeded');
         this.lists.push(res.data);
-        resolve(this.lists);
+        resolve(res.data);
       })
       .catch(err => {
         $log.error('listService.createList failed');
@@ -66,7 +66,8 @@ function listService($log, $q, $http){
       $http.put(`${__API_URL__}/api/list/${data._id}`, data, config)
       .then(res => {
         $log.log('listService.updateList() succeeded');
-        this.list.forEach((list, index) => {
+        console.log('this.lists: ', this.lists);
+        this.lists.forEach((list, index) => {
           if(list._id === res.data._id){
             this.lists[index] = res.data;
           }
@@ -90,6 +91,7 @@ function listService($log, $q, $http){
           if(list._id === listId) this.lists.splice(index, 1);
         });
         $log.log('listService.deleteList() succeeded');
+        console.log('res.data in deleteList(): ', res.data);
         resolve(res.data);
       })
       .catch((err) => {
