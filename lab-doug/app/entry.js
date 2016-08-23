@@ -8,7 +8,13 @@ require('./scss/base.scss');
 const angular = require('angular');
 
 // angular modules
-angular.module('widgetApp', []);
+angular.module('widgetApp', [])
+.config(['$logProvider', function($logProvider){
+  $logProvider.debugEnabled(__DEBUG__);
+}]);
+//a provider is used to configure services in our app
+//the value of DEBUG is a boolean set in webpack.config file
+//it's value is true if we are not in production
 
 // angular services
 require('./service/list-service');
