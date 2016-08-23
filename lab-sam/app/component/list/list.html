@@ -1,0 +1,10 @@
+<div class="app-list">
+  <i class="fa fa-trash" ng-click="listCtrl.deleteList()"></i>
+  <h3> {{listCtrl.list.name}} </h3>
+  <ul>
+    <li>
+      <app-note-item ng-repeat="item in listCtrl.list.notes" note="item" delete-note="listCtrl.deleteNote(noteId)"></app-note-item>
+      <app-note-form create-note="listCtrl.createNote(note)"></app-note-form>
+    </li>
+  </ul>
+</div>

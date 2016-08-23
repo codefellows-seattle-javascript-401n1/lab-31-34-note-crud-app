@@ -1,0 +1,10 @@
+@import "_theme";
+
+.app-note-item {
+  float: left;
+  background-color: $app-light;
+  border-style: solid;
+  border-radius: 8px;
+  border-width: 3px;
+  border-color: black;
+}
