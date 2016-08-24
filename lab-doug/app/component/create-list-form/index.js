@@ -1,18 +1,22 @@
 'use strict';
 require('./create-list-form.scss');
 const angular = require('angular');
+const widgetApp = angular.module('widgetApp');
 
-angular.module('widgetApp').directive('createListForm', function(){
+widgetApp.directive('createListForm', function(){
   return {
     restrict: 'E',
     replace: true,
     template: require('./create-list-form.html'),
-    controller: ['$log', 'listService', CreateListFormController],
+    controller: 'CreateListFormController',
     controllerAs: 'createListFormCtrl',
     bindToController: true,
     scope: {}
   };
 });
+
+
+widgetApp.controller('CreateListFormController', ['$log', 'listService', CreateListFormController]);
 
 function CreateListFormController($log, listService){
 

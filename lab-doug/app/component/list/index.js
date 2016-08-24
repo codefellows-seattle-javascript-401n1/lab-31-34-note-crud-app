@@ -8,7 +8,7 @@ widgetApp.directive('appList', function(){
     restrict: 'E',
     replace: true,
     template: require('./list.html'),
-    controller: ['$log', 'listService', 'noteService', ListController],
+    controller: 'ListController',
     controllerAs: 'listCtrl',
     bindToController: true,
     scope: {
@@ -16,6 +16,11 @@ widgetApp.directive('appList', function(){
     }
   };
 });
+
+/**
+ *registering the controller, directly on the module below, allows for testing the controller directly.   If we had registered on the directive "controller" property above, we would have to go through the directve first when testing.
+ */
+widgetApp.controller('ListController', ['$log', 'listService', 'noteService', ListController]);
 
 function ListController($log, listService, noteService){
   $log.debug('entered ListController() in list/index.js');
@@ -29,6 +34,7 @@ function ListController($log, listService, noteService){
   };
 
   this.createNote = function(data){
+    console.log('createNote data: ', data);
     $log.debug('entered createNote() in listController() in list/index.js');
     data.listId = this.list._id;
     noteService.createNote(data)
@@ -47,7 +53,7 @@ function ListController($log, listService, noteService){
     .then(() => {
       $log.log('deleteNote() in list/index.js succeeded');
       this.list.notes.forEach((note, index) => {
-        if(note._id === noteId) this.list.notes.splice(index, 1)
+        if(note._id === noteId) this.list.notes.splice(index, 1);
       });
     })
     .catch((err) => {

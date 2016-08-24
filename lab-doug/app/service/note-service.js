@@ -14,11 +14,13 @@ function noteService($log, $q, $http){
     }
   };
   service.createNote = function(data) {
+    console.log('data in createNote: ', data);
     $log.debug('entered createNote() in note-service.js');
     return $q((resolve, reject) => {
       $http.post(url, data, config)
       .then((res) => {
         $log.log('post of new note is successful');
+        console.log('res.data in createNote: ', res.data);
         resolve(res.data);
       })
       .catch((err) => {

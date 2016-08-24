@@ -9,7 +9,7 @@ widgetApp.directive('appNoteItem', function(){
     restrict: 'E',
     replace: true,
     template: require('./note-item.html'),
-    controller: ['$log', 'noteService', NoteItemController],
+    controller: 'NoteItemController',
     controllerAs: 'noteItemCtrl',
     bindToController: true,
     scope: {
@@ -18,6 +18,8 @@ widgetApp.directive('appNoteItem', function(){
     }
   };
 });
+
+widgetApp.controller('NoteItemController',['$log', 'noteService', NoteItemController] );
 
 function NoteItemController(){
 

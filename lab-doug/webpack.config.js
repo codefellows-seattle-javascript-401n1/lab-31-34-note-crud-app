@@ -27,7 +27,7 @@ if (production){
         warnings: false
       }
     }),
-    new CleanPlugin()
+    new CleanPlugin('build')
   ]);
 }
 
