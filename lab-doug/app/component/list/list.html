@@ -2,9 +2,7 @@
   <i class="fa fa-minus-circle" ng-click="listCtrl.deleteList()"></i>
   <h2>{{listCtrl.list.name}}</h2>
   <ul>
-    <li>
       <app-note-item ng-repeat="item in listCtrl.list.notes" note="item" delete-note="listCtrl.deleteNote(noteId)"></app-note-item>
       <app-create-note-form create-note="listCtrl.createNote(note)"></app-create-note-form>
-    </li>
   </ul>
 </div>

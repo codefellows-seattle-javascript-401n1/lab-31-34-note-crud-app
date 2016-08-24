@@ -23,9 +23,9 @@ describe('testing note service', function(){
   });
 
   it('should return a note from service.createNote()', () => {
-    this.$httpBackend.expectPOST(noteBaseUrl, {name: 'tasks', content: 'more to do'}, noteHeaders)
-    .respond(200, {_id: '12345678f',name: 'tasks', content: 'more to do', _v: 0});
-    this.noteService.createNote({name: 'tasks', content: 'more to do'})//a promise that returns a note
+    this.$httpBackend.expectPOST(noteBaseUrl, {name: 'tasks', content: 'more to do', listId: '12345678f'}, noteHeaders)
+    .respond(200, {_id: '12345678f',name: 'tasks', content: 'more to do', listId: '12345678f', _v: 0});
+    this.noteService.createNote({name: 'tasks', content: 'more to do', listId: '12345678f' })//a promise that returns a note
     .then (note => {
       expect(note.name).toBe('tasks');
       expect(note.content).toBe('more to do');
