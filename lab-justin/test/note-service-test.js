@@ -26,6 +26,7 @@ describe('testing noteservice', function(){
     this.noteService.createNote({name: 'test note'})
     .then ( list => {
       expect(true).toBe(true);
+      expect(list.name).toBe('test note');
     })
     .catch( err => {
       expect(err).toBe(undefined);
@@ -35,7 +36,7 @@ describe('testing noteservice', function(){
 
   it('TEST: noteService-deleteNote', () => {
     this.$httpBackend.expectDELETE(`${baseUrl}/note/[object Object]`)
-    .respond(200, {_id: '12345', name: 'test note', notes: [], _v: 0});
+    .respond(204, {_id: '12345', name: 'test note', notes: [], _v: 0});
     this.noteService.deleteNote({name: 'test note'})
     .then ( list => {
       expect(true).toBe(true);
