@@ -21,13 +21,18 @@ describe('testing app-create-note-form', function(){
   it('should be fun to test ', () => {
     let iScope = this.appCreateNoteForm.isolateScope();
     iScope.note = {
-      name: 'wat',
-      content: 'lul'
+      name: 'yunjoo',
+      content: 'love corns'
     };
 
     iScope.createNote();
     iScope.$digest();
-    console.log(this.note);
+    expect(iScope.note.name).toBe('yunjoo');
     expect('false').toBe('false');
+    console.log(iScope.note);
+    let heading = iScope.note.find('h3');
+    expect(heading.text().trim()).toBe(iScope.note.name);
+    let paragraph = this.appNoteLi.find('p');
+    expect(paragraph.text().trim()).toBe(iScope.note.content);
   });
 });
