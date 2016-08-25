@@ -29,10 +29,5 @@ describe('testing app-create-note-form', function(){
     iScope.$digest();
     expect(iScope.note.name).toBe('yunjoo');
     expect('false').toBe('false');
-    console.log(iScope.note);
-    let heading = iScope.note.find('h3');
-    expect(heading.text().trim()).toBe(iScope.note.name);
-    let paragraph = this.appNoteLi.find('p');
-    expect(paragraph.text().trim()).toBe(iScope.note.content);
   });
 });

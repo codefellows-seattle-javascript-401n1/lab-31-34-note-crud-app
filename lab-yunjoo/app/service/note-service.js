@@ -13,7 +13,7 @@ function noteService($log, $q, $http){
   let config ={
     headers: {
       'Content-Type':'application/json',
-      'Accept': 'application'
+      'Accept': 'application/json'
     }
   };
 

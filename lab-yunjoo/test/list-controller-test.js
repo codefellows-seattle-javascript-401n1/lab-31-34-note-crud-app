@@ -21,7 +21,7 @@ describe('testing ListController', function(){
     let baseUrl = 'http://localhost:3000/api';
     let headers = {
       'Content-Type':'application/json',
-      'Accept': 'application'
+      'Accept': 'application/json'
     };
     beforeEach(()=>{
       this.listCtrl.list = { name:'example', notes: []};
@@ -36,6 +36,19 @@ describe('testing ListController', function(){
         expect(note.name).toBe('yunjoo');
       }).catch(err=>{
         throw err;
+      });
+      this.$httpBackend.flush();
+    });
+    it('should delete a note', () => {
+      this.$httpBackend.expectDELETE(`${baseUrl}/note/12345`, {'Accept': 'application/json'})
+      .respond(204, {status: 'OK'});
+      this.listCtrl.deleteNote({_id: '12345'})
+      .then (note => {
+        expect(note.name).toBe(undefined);
+        expect(note.content).toBe(undefined);
+      })
+      .catch(err => {
+        expect(err).toBe(undefined);
       });
       this.$httpBackend.flush();
     });

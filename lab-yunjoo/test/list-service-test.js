@@ -41,7 +41,7 @@ describe('testing listService', function(){
     this.listService.createList({name: 'example list'})
     .then((list)=>{
       expect(list._id).toBe('5749834923');
-      expect(list.name).toB('example list');
+      expect(list.name).toBe('example list');
       expect(Array.isArray(list.notes)).toBe(true);
     })
     .catch((err)=>{
@@ -58,7 +58,7 @@ describe('testing listService', function(){
     });
     this.$httpBackend.expectGET(baseUrl,{'Accept':'application/json'})
     .respond(200,{status:'success', _id:'1234567', name:'example list 2', notes:[],_v:0});
-    this.listService.fetchList()
+    this.listService.fetchLists()
     .then((list)=>{
       expect(list._id).toBe('1234567');
       expect(list.name).toBe('example list 2');
@@ -78,36 +78,37 @@ describe('testing listService', function(){
         reject(err);
       });
     });
-    this.$httpBackend.expectPUT(`${baseUrl}/123456`, {_id:'123456', name:'updated example list 3', headers})
-    .respond(200, {status: 'success', _id: '123456', name: 'updated example list 3', notes: [], _v: 0});
-    this.listService.updateList({_id:'123456', name: 'updated example list 3'})
+    this.$httpBackend.expectPUT(`${baseUrl}/123456`, {_id:'123456', name:'updated list 3'}, headers)
+    .respond(200, {status: 'success', _id: '123456', name: 'updated list 3', notes: [], _v: 0});
+    this.listService.updateList({_id:'123456', name: 'updated list 3'}, headers)
     .then((list)=>{
       expect(list._id).toBe('123456');
-      expect(list.name).toBe('updated example list 3');
+      expect(list.name).toBe('updated list 3');
     })
     .catch((err)=>{
       expect(err).toBe(null);
     });
-    it('deleteList should delete a list',()=>{
-      beforeEach(()=>{
-        this.listService.createList({name:'example list 4'})
-        .then((list)=>{
-          resolve(list);
-        })
-        .catch((err)=>{
-          reject(err);
-        });
-      });
-      this.$httpBackend.expectDELETE(`${baseUrl}/12345`)
-      .respond({status:'success'});
-      this.listService.deleteList(2345)
-      .then((res)=>{
-        expect(res.status).toBe('success');
+    this.$httpBackend.flush();
+  });
+  it('deleteList should delete a list',()=>{
+    beforeEach(()=>{
+      this.listService.createList({name:'example list 4'})
+      .then((list)=>{
+        resolve(list);
       })
       .catch((err)=>{
-        expect(err).toBe(null);
+        reject(err);
       });
-      this.$httpBackend.flush();
     });
+    this.$httpBackend.expectDELETE(`${baseUrl}/12345`)
+    .respond({status:'success'});
+    this.listService.deleteList(12345)
+    .then((res)=>{
+      expect(res.status).toBe('success');
+    })
+    .catch((err)=>{
+      expect(err).toBe(null);
+    });
+    this.$httpBackend.flush();
   });
 });
