@@ -14,13 +14,11 @@ function noteService($log, $q, $http){
     }
   };
   service.createNote = function(data) {
-    console.log('data in createNote: ', data);
     $log.debug('entered createNote() in note-service.js');
     return $q((resolve, reject) => {
       $http.post(url, data, config)
       .then((res) => {
         $log.log('post of new note is successful');
-        console.log('res.data in createNote: ', res.data);
         resolve(res.data);
       })
       .catch((err) => {
@@ -33,7 +31,9 @@ function noteService($log, $q, $http){
   service.deleteNote = function(noteId) {
     $log.debug('entered deleteNote() in note-service.js');
     return $q((resolve, reject) => {
-      $http.delete(`${url}/${noteId}`, config)
+      $http.delete(`${url}/${noteId}`, {
+        headers: {'Accept': 'application/json'}
+      })
       .then((res) => {
         $log.log('delete of note is successful');
         resolve(res.data);

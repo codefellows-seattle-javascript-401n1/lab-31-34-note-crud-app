@@ -27,20 +27,20 @@ function ListController($log, listService, noteService){
 
   this.deleteList = function(){
     $log.debug('entered deleteList() in listController() in list/index.js');
-    listService.deleteList(this.list._id)
+    return listService.deleteList(this.list._id)
     .catch((err) => {
       console.log('ListController deleteList() in list/index.js threw error: ', err);
     });
   };
 
   this.createNote = function(data){
-    console.log('createNote data: ', data);
     $log.debug('entered createNote() in listController() in list/index.js');
     data.listId = this.list._id;
-    noteService.createNote(data)
+    return noteService.createNote(data)
     .then ((res) => {
       $log.log('createNote() in list/index.js succeeded');
       this.list.notes.push(res);
+      return res;
     })
     .catch((err) => {
       $log.error('createNote() in list/index.js failed', err);
@@ -49,12 +49,13 @@ function ListController($log, listService, noteService){
 
   this.deleteNote = function(noteId){
     $log.debug('entered deleteNote() in listController() in list/index.js');
-    noteService.deleteNote(noteId)
-    .then(() => {
+    return noteService.deleteNote(noteId)
+    .then((note) => {
       $log.log('deleteNote() in list/index.js succeeded');
       this.list.notes.forEach((note, index) => {
         if(note._id === noteId) this.list.notes.splice(index, 1);
       });
+      return note;
     })
     .catch((err) => {
       $log.error('deleteNote() in list/index.js failed', err);
