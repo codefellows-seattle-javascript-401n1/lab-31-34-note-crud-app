@@ -40,7 +40,6 @@ describe('testing list service', function(){
     .respond(200, [{name: 'score'}, {name: 'competition'}, {name:'match'}]);
     this.listService.fetchLists()//a promise that returns an array of lists
     .then (lists => {
-      console.log('array of lists: ', lists);
       expect(lists[0].name).toBe('score');
       expect(lists[1].name).toBe('competition');
       expect(lists[2].name).toBe('match');
@@ -54,7 +53,6 @@ describe('testing list service', function(){
     .respond(200, {_id: '938374645f', name: 'billy', notes: [{name: 'score'}], _v: 0});
     this.listService.updateList({_id: '938374645f', name: 'billy', notes: [{name: 'score'}], _v: 0 })//a promise that returns a list
     .then (list => {
-      console.log('updated list: ', list);
       expect(list.name).toBe('billy');
       expect(list._id).toBe('938374645f');
       expect(list.notes[0].name).toBe('score');
@@ -68,7 +66,6 @@ describe('testing list service', function(){
     .respond(200, {_id: '938374645f', name: 'billy', notes: [{name: 'score'}], _v: 0});
     this.listService.deleteList('938374645f')
     .then (list => {
-      console.log('updated list: ', list);
       expect(list.name).toBe('billy');
       expect(list._id).toBe('938374645f');
       expect(list.notes[0].name).toBe('score');
