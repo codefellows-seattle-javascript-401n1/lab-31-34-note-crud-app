@@ -1,0 +1,16 @@
+<form class="app-create-note-form form-horizontal" novalidate ng-submit="createNote({note:note})">
+  <!--
+   the "note" property NAME listed in the object above in the ng-submit createNote() has to match the parameter name of the function you are callinging the in the directive.  In this case we are calling "createNote", which calls the createNote ()  in note-service.js.
+
+   the "note" VALUE listed in the object above, will be the note object listed in the ng-model attributes below. It is this VALUE that will  be injected when the createNote function is called.
+ -->
+  <div class="form-group">
+    <label for="name" class="col-sm-2 control-label">Note Name:</label>
+    <input type="text" name="name" ng-model="note.name" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="content" class="col-sm-2 control-label">Content:</label>
+    <input type="text" name="content" ng-model="note.content" class="form-control">
+  </div>
+  <button class="btn btn-default" type="submit">submit</button>
+</form>
