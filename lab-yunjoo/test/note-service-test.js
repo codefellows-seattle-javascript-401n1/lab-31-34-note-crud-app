@@ -25,10 +25,10 @@ describe('testing noteService', function(){
     .respond(200,{_id: '123', name: 'example', content: 'test', _v: 0});
 
     this.noteService.createNote({name: 'example', content:'test'})
-    .then( note => {
+    .then((note) => {
+      expect(true).toBe(true);
       expect(note.name).toBe('example');
       expect(note.content).toBe('test');
-      expect(note._id).teBe('123');
     })
     .catch( err =>{
       expect(err).toBe(undefined);
@@ -37,7 +37,8 @@ describe('testing noteService', function(){
   });
   it('should delete a note',()=>{
     this.$httpBackend.expectDELETE(`${baseUrl}/123`, {'Accept': 'application/json'})
-    .respond(204, { status: 'OK' })
+    .respond(204, { status: 'OK' });
+    this.noteService.deleteNote('123')
     .then( note => {
       expect(note.name).toBe(undefined);
       expect(note.content).toBe(undefined);

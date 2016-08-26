@@ -2,21 +2,19 @@
 'use strict';
 // var baseUrl
 describe('testing ListController', function(){
-  console.log('testing');
   beforeEach(()=>{
-    console.log('hittinghhhhhh');
     angular.mock.module('demoApp');
     angular.mock.inject(($controller, $httpBackend) => {
       this.$httpBackend = $httpBackend;
       this.listCtrl = new $controller('ListController');
-      console.log('this.httpBackend', this.httpBackend);
     });
   });
+
   it('should get list Ctrl', () => {
-    console.log('hitting');
     expect(typeof this.listCtrl).toBe('object');
     expect(typeof this.listCtrl.createNote).toBe('function');
   });
+
   describe('testing listCtrl.createNote',()=>{
     let baseUrl = 'http://localhost:3000/api';
     let headers = {
@@ -31,24 +29,29 @@ describe('testing ListController', function(){
 
     it('should return a note', () =>{
       this.listCtrl.createNote({name:'yunjoo', content:'melong'})
-      .then (note=>{
-        console.log(note);
+      .then(note=>{
         expect(note.name).toBe('yunjoo');
       }).catch(err=>{
         throw err;
       });
       this.$httpBackend.flush();
     });
-    it('should delete a note', () => {
+  });
+  describe('testing listCtrl.deleteNote',()=>{
+    beforeEach(()=>{
+      let baseUrl = 'http://localhost:3000/api';
+      this.listCtrl.list = {name:'exapmle', notes:[]};
       this.$httpBackend.expectDELETE(`${baseUrl}/note/12345`, {'Accept': 'application/json'})
       .respond(204, {status: 'OK'});
-      this.listCtrl.deleteNote({_id: '12345'})
-      .then (note => {
-        expect(note.name).toBe(undefined);
-        expect(note.content).toBe(undefined);
+    });
+
+    it('should delete a note', () => {
+      this.listCtrl.deleteNote('12345')
+      .then(()=> {
+        expect(this.listCtrl.list.notes.length).toBe(0);
       })
       .catch(err => {
-        expect(err).toBe(undefined);
+        throw err;
       });
       this.$httpBackend.flush();
     });

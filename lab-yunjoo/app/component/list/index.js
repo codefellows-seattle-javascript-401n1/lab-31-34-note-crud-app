@@ -48,7 +48,7 @@ function ListController($log, listService, noteService){
 
   this.deleteNote = function(noteId){
     $log.debug('listCtrl.deleteNote');
-    noteService.deleteNote(noteId)
+    return noteService.deleteNote(noteId)
     .then( () => {
       this.list.notes.forEach( (note, index) => {
         if (note._id === noteId) this.list.notes.splice(index, 1);
