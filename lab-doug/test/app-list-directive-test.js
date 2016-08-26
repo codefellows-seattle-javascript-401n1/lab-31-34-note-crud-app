@@ -5,9 +5,13 @@ describe('testing the app-list directive', function(){
     angular.mock.module('widgetApp');
     /**
      * NOTE: The 'inject' function is declared ONLY when running tests with jasmine or mocha.  The inject function wraps a function into an injectable function. The inject() creates new instance of $injector per test, which is then used for resolving references.If a function has an $inject property and its value is an array of strings, then the strings represent names of services to be injected into the function.
-     * Every application has a single root scope. Scopes provide separation between the model and the view, via a mechanism for watching the model for changes.
+     * Every application has a single root scope. Scopes provide separation between the model and the view, via a mechanism for watching the model for changes($watch, $apply).
      */
     angular.mock.inject(($compile, $rootScope) => {
+
+      /**
+       * A root scope can be retrieved using the $rootScope key from the $injector. Child scopes are created using the $new() method.
+       */
       var scope = $rootScope.$new();
       scope.list = {
         _id: '57a10f8653481f70fc61f71d',
@@ -65,7 +69,7 @@ describe('testing the app-list directive', function(){
     expect(iScope.listCtrl.list._id).toBe('57a10f8653481f70fc61f71d');
 
     /**
-     * verifying that the template is actually changed (APPLY)
+     * verifying that the template is actually changed ($apply) with values provided by scope.list
      */
     expect(h2Binding.text()).toBe(iScope.listCtrl.list.name);
   });
