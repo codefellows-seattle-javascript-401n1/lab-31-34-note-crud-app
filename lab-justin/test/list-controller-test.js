@@ -39,10 +39,6 @@ describe('testing ListController', function(){
 //
   describe('testing listCtrl.deleteList', () => {
     let baseUrl = 'http://localhost:3000/api';
-    // let headers = {
-    //   'Content-Type': 'application/json',
-    //   'Accept': 'application/json'
-    // };
 
     beforeEach(() => {
       this.listCtrl.list = {_id: '666', name: 'helloKitty', notes: []};
@@ -64,10 +60,6 @@ describe('testing ListController', function(){
 //
   describe('testing listCtrl.deleteNote', () => {
     let baseUrl = 'http://localhost:3000/api';
-    // let headers = {
-    //   'Content-Type': 'application/json',
-    //   'Accept': 'application/json'
-    // };
 
     beforeEach(() => {
       this.listCtrl.list = {};
