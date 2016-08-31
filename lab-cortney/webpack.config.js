@@ -38,9 +38,6 @@ module.exports = {
     path: 'build',
     filename: 'bundle.js'
   },
-  // sassLoader: {
-  //   includePaths: [`${__dirname}/app/scss/lib`]
-  // },
   postcss: function() {
     return [autoprefixer];
   },

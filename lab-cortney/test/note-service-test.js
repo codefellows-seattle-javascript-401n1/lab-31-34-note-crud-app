@@ -7,8 +7,6 @@ var headers = {
   'Accept': 'application/json'
 };
 
-// const listService = require('../service/list-service');
-
 describe('testing noteService', function() {
 
   beforeEach( () => {
@@ -19,16 +17,6 @@ describe('testing noteService', function() {
       this.$httpBackend = $httpBackend;
     });
   });
-
-  //   this.listService.createList({name: 'example list'})
-  //   .then( (list) => {
-  //     this.list = list;
-  //     resolve(list);
-  //   })
-  //   .catch( (err) => {
-  //     reject(err);
-  //   });
-  // });
 
   afterEach( () => {
     this.$httpBackend.verifyNoOutstandingExpectation();
